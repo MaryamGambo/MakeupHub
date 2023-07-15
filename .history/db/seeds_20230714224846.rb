@@ -111,21 +111,21 @@
 # end
 
 
-# Seed Provinces with Canadian tax rates
+# Seed Provinces with Canadian tax rates using Faker
 provinces_data = [
-  { name: 'Alberta', tax_type: 'GST', GST: 0.05, PST: 0, HST: 0 },
-  { name: 'British Columbia', tax_type: 'GST+PST', GST: 0.05, PST: 0.05, HST: 0 },
-  { name: 'Manitoba', tax_type: 'GST+PST', GST: 0.05, PST: 0.07, HST: 0 },
-  { name: 'New Brunswick', tax_type: 'HST', GST: 0, PST: 0, HST: 0.15 },
-  { name: 'Newfoundland and Labrador', tax_type: 'HST', GST: 0, PST: 0, HST: 0.15 },
-  { name: 'Northwest Territories', tax_type: 'GST', GST: 0.05, PST: 0, HST: 0 },
-  { name: 'Nova Scotia', tax_type: 'HST', GST: 0, PST: 0, HST: 0.15 },
-  { name: 'Nunavut', tax_type: 'GST', GST: 0.05, PST: 0, HST: 0 },
-  { name: 'Ontario', tax_type: 'HST', GST: 0, PST: 0, HST: 0.13 },
-  { name: 'Prince Edward Island', tax_type: 'HST', GST: 0, PST: 0, HST: 0.15 },
-  { name: 'Quebec', tax_type: 'GST+PST', GST: 0.05, PST: 0.09975, HST: 0 },
-  { name: 'Saskatchewan', tax_type: 'GST+PST', GST: 0.05, PST: 0.06, HST: 0 },
-  { name: 'Yukon', tax_type: 'GST', GST: 0.05, PST: 0, HST: 0 }
+  { name: 'Alberta', tax_type: 'GST', GST: 0.05, PST: nil, HST: nil },
+  { name: 'British Columbia', tax_type: 'GST+PST', GST: 0.05, PST: 0.05, HST: nil },
+  { name: 'Manitoba', tax_type: 'GST+PST', GST: 0.05, PST: 0.07, HST: nil },
+  { name: 'New Brunswick', tax_type: 'HST', GST: nil, PST: nil, HST: 0.15 },
+  { name: 'Newfoundland and Labrador', tax_type: 'HST', GST: nil, PST: nil, HST: 0.15 },
+  { name: 'Northwest Territories', tax_type: 'GST', GST: 0.05, PST: nil, HST: nil },
+  { name: 'Nova Scotia', tax_type: 'HST', GST: nil, PST: nil, HST: 0.15 },
+  { name: 'Nunavut', tax_type: 'GST', GST: 0.05, PST: nil, HST: nil },
+  { name: 'Ontario', tax_type: 'HST', GST: nil, PST: nil, HST: 0.13 },
+  { name: 'Prince Edward Island', tax_type: 'HST', GST: nil, PST: nil, HST: 0.15 },
+  { name: 'Quebec', tax_type: 'GST+PST', GST: 0.05, PST: 0.09975, HST: nil },
+  { name: 'Saskatchewan', tax_type: 'GST+PST', GST: 0.05, PST: 0.06, HST: nil },
+  { name: 'Yukon', tax_type: 'GST', GST: 0.05, PST: nil, HST: nil }
 ]
 provinces_data.each do |province_data|
   Province.create(province_data)
