@@ -5,11 +5,11 @@ class CreateCustomers < ActiveRecord::Migration[7.0]
       t.string :last_name
       t.string :primary_address
       t.string :primary_city
-      t.references :primary_province, foreign_key: { to_table: :provinces }, index: true
+      t.references :primary_province, null: false, foreign_key: true
       t.string :primary_postal_code
       t.string :alt_address
       t.string :alt_city
-      t.references :alt_province, foreign_key: { to_table: :provinces }, index: true
+      t.references :alt_province, null: false, foreign_key: true
       t.string :alt_postal_code
       t.string :password
 
