@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  tax_type: MyString
+  GST: 9.99
+  PST: 9.99
+  HST: 9.99
+
+two:
+  name: MyString
+  tax_type: MyString
+  GST: 9.99
+  PST: 9.99
+  HST: 9.99
