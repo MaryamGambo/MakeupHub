@@ -4,7 +4,7 @@
   <% search_category = Type.find(params[:type_id]).name if params[:type_id].present? %>
 
   <% if search_category.present? %>
-    <p>Your search result for "<%= search_keyword %>" in "<%= search_category %>" Category found <%= @products.size %> results.</p>
+    <p>Your search result for "<%= search_keyword %>" in "<%= search_category %>" found <%= @products.size %> results.</p>
   <% else %>
     <p>Your search result for "<%= search_keyword %>" in All Categories found <%= @products.count %> results.</p>
   <% end %>

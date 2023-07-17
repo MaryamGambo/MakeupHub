@@ -36,6 +36,7 @@ class ProductsController < ApplicationController
     @products = Product.all
 
     if params[:type_id].present? && params[:keyword].present?
+      @people = @species.people.where('people.name LIKE ?', "%#{params[:name]}%")
       @products = @products.where(type_id: params[:type_id])
                            .where('name LIKE ?', "%#{params[:keyword]}%")
     elsif params[:keyword].present?

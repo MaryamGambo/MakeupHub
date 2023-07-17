@@ -1,0 +1,15 @@
+<h1>Search Results</h1>
+
+<p>Your search <%= params[:keyword].present? ? "for \"#{params[:keyword]}\"" : "" %>
+<%= @type.present? ? "in the \"#{@species.name}\" species category" : "in All Species" %>
+found <%= @people.size %> characters.
+    </p>
+
+<% if @products.any? %>
+  <% @products.each do |product| %>
+    <h3><%= product.name %></h3>
+    <!-- Display other product details as desired -->
+  <% end %>
+<% else %>
+  <p>No products found.</p>
+<% end %>

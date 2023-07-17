@@ -23,7 +23,7 @@
      <div >
       <%= form_tag(filter_products_path, method: :get, class: 'navbar-item') do %>
         <div class="select is-dark">
-          <%= select_tag(:type_id, options_for_select(Type.all.map { |t| [t.name, t.id] }), include_blank: 'All Categories') %>
+          <%= select_tag(:type_id, options_for_select(Type.all.map { |t| [t.name, t.id] }), include_blank: 'All Types') %>
         </div>
         <div class="buttons">
           <%= submit_tag('Search', class: 'button is-primary') %>
@@ -41,19 +41,17 @@
         </div>
       <% end %>
     </div>
-    <div class="navbar-end">
-    <%= form_tag(search_products_path, method: :get, class: 'navbar-item') do %>
+    <%= form_tag(search_path, method: :get, class: 'navbar-item') do %>
+      <div class="select is-dark">
+        <%= select_tag(:category_id, options_for_select(Category.all.map { |c| [c.name, c.id] }), include_blank: 'All Categories') %>
+      </div>
       <div class="navbar-item has-background-dark">
         <%= text_field_tag(:keyword, params[:keyword], id: 'keyword-input', placeholder: 'Search by Keyword', class: 'input') %>
-      </div>
-       <div class="select is-dark">
-        <%= select_tag(:type_id, options_for_select(Type.all.map { |p| [p.name, p.id] }), include_blank: 'All Categories') %>
       </div>
       <div class="buttons">
         <%= submit_tag('Search', class: 'button is-primary') %>
       </div>
     <% end %>
-    </div>
 
   </div>
 

@@ -1,12 +1,12 @@
 <h1>Search Results</h1>
 
   <% search_keyword = params[:keyword].presence || "All products" %>
-  <% search_category = Type.find(params[:type_id]).name if params[:type_id].present? %>
+  <% search_category = Category.find(params[:category_id]).name if params[:category_id].present? %>
 
   <% if search_category.present? %>
-    <p>Your search result for "<%= search_keyword %>" in "<%= search_category %>" Category found <%= @products.size %> results.</p>
+    <p>Your search result for "<%= search_keyword %>" in "<%= search_category %>" found <%= @products.count %> results.</p>
   <% else %>
-    <p>Your search result for "<%= search_keyword %>" in All Categories found <%= @products.count %> results.</p>
+    <p>Your search result for "<%= search_keyword %>" found <%= @products.count %> results.</p>
   <% end %>
 
 <% if @products.any? %>

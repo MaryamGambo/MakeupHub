@@ -36,11 +36,14 @@ class ProductsController < ApplicationController
     @products = Product.all
 
     if params[:type_id].present? && params[:keyword].present?
-      @products = @products.where(type_id: params[:type_id])
+      @products = @products.where(category_id: params[:category_id])
                            .where('name LIKE ?', "%#{params[:keyword]}%")
     elsif params[:keyword].present?
       @products = @products.where('name LIKE ?', "%#{params[:keyword]}%")
     end
 
+    # Other filtering conditions if required
+
+    # ...
   end
 end
