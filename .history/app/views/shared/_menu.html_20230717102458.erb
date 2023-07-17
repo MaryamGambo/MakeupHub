@@ -1,0 +1,60 @@
+<nav class="navbar is-dark"  aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="<%= root_path %>">MAKEUP HUB</a>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+      data-target="navbarNav">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu has-background-dark" id="navbarNav">
+    <div class="navbar-start ">
+      <a class="navbar-item has-text-white" href="<%= root_path %>">Products</a>
+      <a class="navbar-item has-text-white" href="<%= species_index_path %>">Species</a>
+      <a class="navbar-item has-text-white" href="<%= vehicles_path %>">Vehicles</a>
+
+      <a class="navbar-item has-text-white" href="<%= planets_path %>">About Us</a>
+      <a class="navbar-item has-text-white" href="<%= about_path %>">Contact Us</a>
+    </div>
+     <div class="navbar-end">
+      <%= form_tag(products_path, method: :get, class: 'navbar-item') do %>
+        <div class="select is-dark">
+          <%= select_tag(:type_id, options_for_select(Type.all.map { |t| [t.name, t.id] }), include_blank: 'All Types') %>
+        </div>
+        <div class="buttons">
+          <%= submit_tag('Search', class: 'button is-primary') %>
+        </div>
+      <% end %>
+      <%= form_tag(products_path, method: :get, class: 'navbar-item') do %>
+        <div class="buttons">
+          <%= check_box_tag(:new, true) %>
+          <label for="new">New</label>
+          <%= check_box_tag(:recently_updated, true) %>
+          <label for="recently_updated">Recently Updated</label>
+          <%= check_box_tag(:on_sale, true) %>
+          <label for="on_sale">On Sale</label>
+          <%= submit_tag('Filter', class: 'button is-primary') %>
+        </div>
+      <% end %>
+    </div>
+    <%
+=begin%>
+ <%= form_tag(search_people_path, method: :get,  class: 'navbar-end') do %>
+      <div class="navbar-item has-background-dark">
+        <%= text_field_tag(:name, params[:name], id: 'name-input', placeholder: 'Search by Name', class: 'input') %>
+      </div>
+      <div class="navbar-item has-background-dark">
+        <%= select_tag(:species_id, options_for_select(Species.all.map { |s| [s.name, s.id] }, params[:species_id]), include_blank: 'All Species', default: nil, class: 'select') %>
+      </div>
+      <div class="navbar-item has-background-dark">
+        <%= submit_tag('Search', class: 'button is-primary') %>
+      </div>
+    <% end %>
+<%
+=end%>
+  </div>
+
+
+</nav>
