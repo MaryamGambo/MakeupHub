@@ -1,0 +1,20 @@
+<h1>Products</h1>
+<%= paginate @products%>
+<% if params[:type_id].present? %>
+  <p>Current Filter: Category - <%= Type.find(params[:type_id]).name %></p>
+<% elsif params[:new].present? %>
+  <p>Current Filter: New Products</p>
+<% elsif params[:recently_updated].present? %>
+  <p>Current Filter: Recently Updated Products</p>
+<% elsif params[:on_sale].present? %>
+  <p>Current Filter: On Sale Products</p>
+<% else %>
+  <p>All Products</p>
+<% end %>
+
+ <div class="columns  is-multiline">
+<% @products.each do |product| %>
+    <%= render product%>
+
+<% end %>
+</div>

@@ -1,5 +1,4 @@
 <div class="container">
-<%= render partial: 'filter'%>
   <%= paginate @products%>
   <% if params[:type_id].present? %>
     <h3 class="title is-5">Current Filter: Category - <%= Type.find(params[:type_id]).name %></h3>

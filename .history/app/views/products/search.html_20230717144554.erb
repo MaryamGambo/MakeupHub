@@ -1,14 +1,14 @@
 <div class="conatiner">
   <%= paginate @products %>
-  <h1 class="title is-2">Search Results</h1>
+  <h1 class="title is-3">Search Results</h1>
 
   <% search_keyword = params[:keyword].presence || "All products" %>
   <% search_category = Type.find(params[:type_id]).name if params[:type_id].present? %>
 
   <% if search_category.present? %>
-    <p class="subtitle" >Your search result for "<%= search_keyword %>" in "<%= search_category %>" Category found <%= @products.size %> results.</p>
+    <p >Your search result for "<%= search_keyword %>" in "<%= search_category %>" Category found <%= @products.size %> results.</p>
   <% else %>
-    <p class="subtitle">Your search result for "<%= search_keyword %>" in All Categories found <%= @products.count %> results.</p>
+    <p>Your search result for "<%= search_keyword %>" in All Categories found <%= @products.count %> results.</p>
   <% end %>
 
   <% if @products.any? %>

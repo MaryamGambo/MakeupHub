@@ -1,0 +1,41 @@
+<div>
+<%= form_tag(filter_products_path, method: :get, class: 'navbar-item') do %>
+        <div class="buttons">
+          <%= check_box_tag(:new, true) %>
+          <label for="new">New</label>
+          <%= check_box_tag(:recently_updated, true) %>
+          <label for="recently_updated">Recently Updated</label>
+          <%= check_box_tag(:on_sale, true) %>
+          <label for="on_sale">On Sale</label>
+          <%= submit_tag('Filter', class: 'button is-primary') %>
+        </div>
+      <% end %>
+<%= paginate @products%>
+    <% if @type %>
+        <h2 class="title is-2">Products with Type: <%= @type.name %></h2>
+        <% @products.each do |product| %>
+            <%= render product%>
+        <%end%>
+    <% elsif @category %>
+        <h2 class="title is-2">Products with Category: <%= @category.name %></h2>
+        <% @products.each do |product| %>
+            <%= render product%>
+        <%end%>
+    <% elsif @brand %>
+        <h2 class="title is-2">Products with Brand: <%= @brand.name %></h2>
+        <% @products.each do |product| %>
+            <%= render product%>
+        <%end%>
+    <% else %>
+        <h2 class="title is-2">All Products</h2>
+        <% @products.each do |product| %>
+                <%= render product%>
+        <%end%>
+    <%end%>
+
+    <% if @products.empty? %>
+        <h3>No products found in <%= @association_name %>.</h3>
+    <% end %>
+</div>
+
+

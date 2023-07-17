@@ -1,9 +1,9 @@
 
-<div class="column is-one-third">
+<div class="columns is-one-third">
   <div class="card">
     <% if product.image.attached? %>
       <div class="card-image">
-        <%= image_tag product.image%>
+        <%= image_tag product.image.variant(resize: "300x300") %>
       </div>
     <% end %>
     <div class="card-content">

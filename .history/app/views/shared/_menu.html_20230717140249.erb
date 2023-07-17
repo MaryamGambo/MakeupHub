@@ -15,6 +15,15 @@
       <a class="navbar-item has-text-white" href="<%= about_path %>">About Us</a>
       <a class="navbar-item has-text-white" href="<%= contact_path %>">Contact Us</a>
     </div>
+     <div >
+      <%= form_tag(filter_products_path, method: :get, class: 'navbar-item') do %>
+        <div class="select is-dark">
+          <%= select_tag(:type_id, options_for_select(Type.all.map { |t| [t.name, t.id] }), include_blank: 'All Categories') %>
+        </div>
+        <div class="buttons">
+          <%= submit_tag('Search', class: 'button is-primary') %>
+        </div>
+      <% end %>
 
     </div>
     <div class="navbar-end">

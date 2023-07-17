@@ -1,5 +1,5 @@
 <div class="container">
-   <%= render partial: 'filter'%>
+   <%= render filter%>
     <%= paginate @products%>
     <% if @type %>
         <h2 class="title is-4">Products with Type: <%= @type.name %></h2>
