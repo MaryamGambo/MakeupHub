@@ -3,15 +3,15 @@ class ProductsController < ApplicationController
   def index
     if params[:type_id]
       @type = Type.find(params[:type_id])
-      @products = @type.products
+      @product = @type.products
     elsif params[:category_id]
-      @category = Category.find(params[:category_id])
-      @products = @category.products
+      @category = Ctaegory.find(params[:category_id])
+      @product = @category.product
     elsif params[:brand_id]
       @brand = Brand.find(params[:brand_id])
-      @products = @brand.products
+      @product = @brand.product
     else
-      @products = Product.all
+      @product = Product.all
     end
   end
   # show page to view individual product pages

@@ -5,11 +5,11 @@ class ProductsController < ApplicationController
       @type = Type.find(params[:type_id])
       @products = @type.products
     elsif params[:category_id]
-      @category = Category.find(params[:category_id])
-      @products = @category.products
+      @category = Ctaegory.find(params[:category_id])
+      @products = @category.product
     elsif params[:brand_id]
       @brand = Brand.find(params[:brand_id])
-      @products = @brand.products
+      @products = @brand.product
     else
       @products = Product.all
     end

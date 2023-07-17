@@ -5,7 +5,7 @@
             <%= render product%>
         <%end%>
     <% elsif @category %>
-        <h2 class="title is-2">Products with Category: <%= @category.name %></h2>
+        <h2 class="title is-2">Products with Catgory: <%= @category.name %></h2>
         <% @products.each do |product| %>
             <%= render product%>
         <%end%>
@@ -14,12 +14,6 @@
         <% @products.each do |product| %>
             <%= render product%>
         <%end%>
-    <% else %>
-        <h2 class="title is-2">All Products</h2>
-        <% @products.each do |product| %>
-                <%= render product%>
-        <%end%>
-    <%end%>
 </div>
-
+<h1>Products</h1>
 

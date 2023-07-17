@@ -1,0 +1,8 @@
+<div>
+    <% if @type %>
+         <h2 class="title is-2">Characters with Species: <%= @species.name %></h2>
+</div>
+<h1>Products</h1>
+<% @products.each do |product| %>
+    <%= render product%>
+<%end%>
