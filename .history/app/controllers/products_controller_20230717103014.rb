@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   end
 
   def type
-    @type =   Type.find(params[:type_id])
+    @type =   Type.find(params[:id])
     @products = @type.products
   end
 end
