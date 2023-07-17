@@ -21,7 +21,7 @@
 =end%>
     </div>
      <div class="navbar-end">
-      <%= form_tag(filter_products_path, method: :get, class: 'navbar-item') do %>
+      <%= form_tag(filter_products, method: :get, class: 'navbar-item') do %>
         <div class="select is-dark">
           <%= select_tag(:type_id, options_for_select(Type.all.map { |t| [t.name, t.id] }), include_blank: 'All Types') %>
         </div>
@@ -29,7 +29,7 @@
           <%= submit_tag('Search', class: 'button is-primary') %>
         </div>
       <% end %>
-      <%= form_tag(filter_products_path, method: :get, class: 'navbar-item') do %>
+      <%= form_tag(filter_products, method: :get, class: 'navbar-item') do %>
         <div class="buttons">
           <%= check_box_tag(:new, true) %>
           <label for="new">New</label>

@@ -8,6 +8,11 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  # navigate through products by their types
+  def type
+    @type = Type.find(params[:type_id])
+    @products = @type.products
+  end
 
   # navigate through products by filters: types, on-sale,new,  and recently-updated
   def filter

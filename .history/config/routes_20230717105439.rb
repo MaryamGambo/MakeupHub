@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # get 'products/show'
   resources :products, only: [:index, :show] do
     collection do
-      get 'filter'
+      get 'filter', to: 'products#filter', as: 'filter_products'
     end
   end
 

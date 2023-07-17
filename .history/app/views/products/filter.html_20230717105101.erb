@@ -1,0 +1,16 @@
+<% if params[:category_id].present? %>
+  <p>Current Filter: Category - <%= Category.find(params[:category_id]).name %></p>
+<% if params[:new].present? %>
+  <p>Current Filter: New Products</p>
+<% elsif params[:recently_updated].present? %>
+  <p>Current Filter: Recently Updated Products</p>
+<% elsif params[:on_sale].present? %>
+  <p>Current Filter: On Sale Products</p>
+<% else %>
+  <p>All Products</p>
+<% end %>
+
+<% @products.each do |product| %>
+  <h3><%= product.name %></h3>
+  <!-- Display other product details as desired -->
+<% end %>
