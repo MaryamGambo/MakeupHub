@@ -59,16 +59,15 @@ class ProductsController < ApplicationController
 
     if params[:type_id].present? && params[:keyword].present?
       @products = @products.where(type_id: params[:type_id])
-                           .where('name LIKE ?', "%#{params[:keyword]}%")
+                           .where('name LIKE ?', "%#{params[:keyword]}%").page(params[:page]).per(15)
     elsif params[:type_id].present?
-      @products = @products.where(type_id: params[:type_id])
+      @products = @products.where(type_id: params[:type_id]).page(params[:page]).per(15)
     elsif params[:keyword].present?
-      @products = @products.where('name LIKE ?', "%#{params[:keyword]}%")
+      @products = @products.where('name LIKE ?', "%#{params[:keyword]}%").page(params[:page]).per(15)
     else
-      @products = @products
+      @products = @products.page(params[:page]).per(15)
     end
-    @total_results = @products.size
-    @products = @products.page(params[:page]).per(15)
+    @total_results = @products.count
   end
 
 end

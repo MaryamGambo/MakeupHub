@@ -67,7 +67,7 @@ class ProductsController < ApplicationController
     else
       @products = @products
     end
-    @total_results = @products.size
+    @total_results = @products.count
     @products = @products.page(params[:page]).per(15)
   end
 
