@@ -5,7 +5,7 @@
     </div>
     <div class="field-body">
       <div class="field">
-        <%= form_tag(filter_by_category_products_path, method: :get, class: 'navbar-item', id: 'category-form') do %>
+        <%= form_tag(filter_products_path, method: :get, class: 'navbar-item', id: 'category-form') do %>
           <div class="select is-dark control">
             <%= select_tag(:type_id, options_for_select(Type.all.map { |t| [t.name, t.id] }, params[:type_id]), include_blank: 'All Categories', id: 'category-select') %>
           </div>
@@ -29,7 +29,6 @@
             <%= radio_button_tag(:filter, 'on_sale', params[:filter] == 'on_sale', value: 'on_sale', class: 'filter-radio', id: "on_sale"  ) %>
             <label for="on_sale">On Sale</label>
           </div>
-          <%= hidden_field_tag(:hidden_submit) %>
         <% end %>
       </div>
     </div>
@@ -39,6 +38,7 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const categoryForm = document.getElementById('category-form');
+    const filterForm = document.getElementById('filter-form');
 
     categoryForm.addEventListener('change', function(event) {
       event.preventDefault();
@@ -47,12 +47,11 @@
       }
     });
 
-    const filterRadios = document.querySelectorAll('#filter-form input[type="radio"]');
-
-    filterRadios.forEach(function(radio) {
-      radio.addEventListener('change', function() {
-        document.getElementById('filter-form').submit();
-      });
+    filterForm.addEventListener('change', function(event) {
+      event.preventDefault();
+      if (event.target.classList.contains('filter-radio')) {
+        filterForm.submit();
+      }
     });
   });
 </script>

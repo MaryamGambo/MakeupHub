@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="field is-horizontal">
+     <div class="field-label is-normal">
+      <label class="label">Filter By</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+    <%= form_tag(filter_products_path, method: :get, class: 'navbar-item', id: 'filter-form') do %>
+     <div class="control">
+        <%= radio_button_tag(:filter, 'new', params[:filter] == 'new', class: 'filter-radio') %>
+        <label for="new">New</label>
+      </div>
+      <div class="control">
+        <%= radio_button_tag(:filter, 'recently_updated', params[:filter] == 'recently_updated', class: 'filter-radio') %>
+        <label for="recently_updated">Recently Updated</label>
+      </div>
+      <div class="control">
+        <%= radio_button_tag(:filter, 'on_sale', params[:filter] == 'on_sale', class: 'filter-radio') %>
+        <label for="on_sale">On Sale</label>
+      </div>
+    <% end %>
+    </div>
+    </div>
+    </div>
+
+   <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">Select Category</label>
+      </div>
+      <div class="field-body">
+      <div class="field">
+    <%= form_tag(filter_products_path, method: :get, class: 'navbar-item', id: 'category-form') do %>
+      <div class="select is-dark control">
+        <%= select_tag(:type_id, options_for_select(Type.all.map { |t| [t.name, t.id] }, params[:type_id]), include_blank: 'All Categories', id: 'category-select') %>
+      </div>
+    <% end %>
+  </div>
+  </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('.filter-checkbox');
+    checkboxes.forEach(function(checkbox) {
+      checkbox.addEventListener('change', function() {
+        document.getElementById('filter-form').submit();
+      });
+    });
+
+    const categorySelect = document.getElementById('category-select');
+    categorySelect.addEventListener('change', function() {
+      document.getElementById('category-form').submit();
+    });
+  });
+</script>

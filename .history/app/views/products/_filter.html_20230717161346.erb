@@ -5,7 +5,7 @@
     </div>
     <div class="field-body">
       <div class="field">
-        <%= form_tag(filter_by_category_products_path, method: :get, class: 'navbar-item', id: 'category-form') do %>
+        <%= form_tag(filterByType_products_path, method: :get, class: 'navbar-item', id: 'category-form') do %>
           <div class="select is-dark control">
             <%= select_tag(:type_id, options_for_select(Type.all.map { |t| [t.name, t.id] }, params[:type_id]), include_blank: 'All Categories', id: 'category-select') %>
           </div>
@@ -20,7 +20,7 @@
     </div>
     <div class="field-body">
       <div class="field">
-        <%= form_tag(filter_products_path, method: :get, class: 'navbar-item', id: 'filter-form') do %>
+        <%= form_tag(filterByOptions_products_path, method: :get, class: 'navbar-item', id: 'filter-form') do %>
           <div class="control">
             <%= radio_button_tag(:filter, 'new', params[:filter] == 'new', value: 'new',class: 'filter-radio' ,id: 'new') %>
             <label for="new">New</label>

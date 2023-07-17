@@ -26,6 +26,10 @@ class ProductsController < ApplicationController
   def filter
     @products = Product.page(params[:page]).per(15)
 
+    if params[:type_id].present?
+      @products = @products.where(type_id: params[:type_id])
+    end
+
     if params[:new].present?
       @products = @products.where('created_at >= ?', 3.days.ago.beginning_of_day)
     end
@@ -34,15 +38,11 @@ class ProductsController < ApplicationController
       @products = @products.where(on_sale_status: true)
     end
 
-    @products = @products.order(created_at: :desc)
-  end
-
-  def filter_by_category
-    if params[:type_id].present?
-      @products = Product.where(type_id: params[:type_id]).order(created_at: :desc).page(params[:page]).per(15)
-    else
-      @products = Product.order(created_at: :desc).page(params[:page]).per(15)
+    if params[:recently_updated].present?
+      @products = @products.where('updated_at >= ?', 3.days.ago.beginning_of_day)
     end
+
+    @products = @products.order(created_at: :desc)
   end
 
 

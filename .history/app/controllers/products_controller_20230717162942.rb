@@ -38,11 +38,8 @@ class ProductsController < ApplicationController
   end
 
   def filter_by_category
-    if params[:type_id].present?
-      @products = Product.where(type_id: params[:type_id]).order(created_at: :desc).page(params[:page]).per(15)
-    else
-      @products = Product.order(created_at: :desc).page(params[:page]).per(15)
-    end
+    @products = Product.where(type_id: params[:type_id]).order(created_at: :desc).page(params[:page]).per(15)
+    render :filter
   end
 
 

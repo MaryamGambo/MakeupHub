@@ -2,17 +2,18 @@
   <%= render partial: 'filter' %>
   <%= paginate @products %>
 
-  <% if params[:new].present? %>
+  <% if params[:type_id].present? %>
+    <h3 class="title is-5">Current Filter: Category - <%= Type.find(params[:type_id]).name %></h3>
+    <p>here</p>
+  <% elsif params[:new].present? %>
     <h3 class="title is-5">Current Filter: New Products</h3>
+  <% elsif params[:recently_updated].present? %>
+    <h3 class="title is-5">Current Filter: Recently Updated Products</h3>
   <% elsif params[:on_sale].present? %>
     <h3 class="title is-5">Current Filter: On Sale Products</h3>
        <p>here</p>
-  <%
-=begin%>
- <% else %>
+  <% else %>
     <h3 class="title is-5">All Products</h3>
-<%
-=end%>
   <% end %>
 
   <div class="columns is-multiline">

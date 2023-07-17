@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Filter By</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <%= form_tag(filter_products_path, method: :get, class: 'navbar-item', id: 'filter-form') do %>
+          <div class="control">
+            <label class="radio">
+              <%= radio_button_tag(:filter, 'new', params[:filter] == 'new', class: 'filter-radio') %>
+              New
+            </label>
+          </div>
+          <div class="control">
+            <label class="radio">
+              <%= radio_button_tag(:filter, 'recently_updated', params[:filter] == 'recently_updated', class: 'filter-radio') %>
+              Recently Updated
+            </label>
+          </div>
+          <div class="control">
+            <label class="radio">
+              <%= radio_button_tag(:filter, 'on_sale', params[:filter] == 'on_sale', class: 'filter-radio') %>
+              On Sale
+            </label>
+          </div>
+          <%= submit_tag('Filter', class: 'button is-primary') %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Select Category</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <%= form_tag(filter_products_path, method: :get, class: 'navbar-item', id: 'category-form') do %>
+          <div class="control select is-dark">
+            <%= select_tag(:type_id, options_for_select(Type.all.map { |t| [t.name, t.id] }, params[:type_id]), include_blank: 'All Categories', id: 'category-select') %>
+          </div>
+          <%= submit_tag('Search', class: 'button is-primary') %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterRadios = document.querySelectorAll('.filter-radio');
+    filterRadios.forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        document.getElementById('filter-form').submit();
+      });
+    });
+
+    const categorySelect = document.getElementById('category-select');
+    categorySelect.addEventListener('change', function() {
+      document.getElementById('category-form').submit();
+    });
+  });
+</script>

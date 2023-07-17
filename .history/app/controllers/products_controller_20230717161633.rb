@@ -22,8 +22,13 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  def filterByType
+    @products = @products.where(type_id: params[:type_id]).page(params[:page]).per(15)
+  end
+
+
   # navigate through products by filters: types, on-sale,new,  and recently-updated
-  def filter
+  def filterByOptions
     @products = Product.page(params[:page]).per(15)
 
     if params[:new].present?
@@ -35,14 +40,6 @@ class ProductsController < ApplicationController
     end
 
     @products = @products.order(created_at: :desc)
-  end
-
-  def filter_by_category
-    if params[:type_id].present?
-      @products = Product.where(type_id: params[:type_id]).order(created_at: :desc).page(params[:page]).per(15)
-    else
-      @products = Product.order(created_at: :desc).page(params[:page]).per(15)
-    end
   end
 
 
