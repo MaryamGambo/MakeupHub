@@ -1,0 +1,13 @@
+<div>
+<h1><%= @product.name %></h1>
+<p>Brand: <%= @product.brand.name %></p>
+<p>Type: <%= @product.type.name %></p>
+<p>Category: <%= @product.category.name %></p>
+<p>Price: <%= @product.price %></p>
+<p>Description: <%= @product.description %></p>
+<p>On Sale: <%= @product.on_sale_status ? 'Yes' : 'No' %></p>
+<% if @product.image.attached? %>
+  <p>Image:</p>
+  <%= image_tag @product.image %>
+<% end %>
+</div>
