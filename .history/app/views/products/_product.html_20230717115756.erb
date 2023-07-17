@@ -1,7 +1,7 @@
 <div>
   <% if product.image.attached? %>
     <p>Image:</p>
-    <%= image_tag product.image %>
+    <%= image_tag product.image.variant(resize: "200x200") %>
   <% end %>
   <h1><%= link_to product.name, product %></h1>
   <p><%= product.brand.name%></p>

@@ -1,7 +1,7 @@
 <div>
   <% if @product.image.attached? %>
     <h2>Product Image</h2>
-    <%= image_tag @product.image %>
+    <%= image_tag @product.image.variant(resize: "500x500") %>
   <% end %>
 
   <div class="product-full-details">

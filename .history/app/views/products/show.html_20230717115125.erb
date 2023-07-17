@@ -1,10 +1,15 @@
 <div>
   <% if @product.image.attached? %>
     <h2>Product Image</h2>
-    <%= image_tag @product.image %>
+    <%= image_tag @product.image.variant(resize: "500x500") %>
   <% end %>
 
-  <div class="product-full-details">
+  <%= render @product %>
+  <%= link_to "Back to all products", products_path, class: "button is-info" %>
+</div>
+
+<div class="product-full-details">
+
   <h1><%= @product.name %></h1>
   <p>Brand: <%= @product.brand.name %></p>
   <p>Type: <%= @product.type.name %></p>
@@ -12,11 +17,4 @@
   <p>Price: <%= @product.price %></p>
   <p>Description: <%= @product.description %></p>
   <p>On Sale: <%= @product.on_sale_status ? 'Yes' : 'No' %></p>
-  </div>
-
-
-  <%= link_to "Back to all products", products_path, class: "button is-info" %>
-</div>
-
-
 
