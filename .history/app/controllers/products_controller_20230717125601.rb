@@ -22,6 +22,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+
   # navigate through products by filters: types, on-sale,new,  and recently-updated
   def filter
     @products = Product.page(params[:page]).per(15)

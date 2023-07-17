@@ -1,0 +1,22 @@
+<div>
+  <% if @product.image.attached? %>
+    <h2>Product Image</h2>
+    <%= image_tag @product.image %>
+  <% end %>
+
+  <div class="product-full-details">
+  <h1><%= @product.name %></h1>
+  <p>Brand: <%= link_to @product.brand.name, products_path(brand_id: @product.brand_id) %></p>
+  <p>Type: <%= link_to @product.type.name, products_path(type_id: @product.type_id) %></p>
+  <p>Category: <%= link_to @product.category.name, products_path(category_id: @product.category_id) %></p>
+  <p>Price: <%= @product.price %></p>
+  <p>Description: <%= @product.description %></p>
+  <p>On Sale: <%= @product.on_sale_status ? 'Yes' : 'No' %></p>
+  </div>
+
+
+  <%= link_to "Back to all products", products_path, class: "button is-info" %>
+</div>
+
+
+
