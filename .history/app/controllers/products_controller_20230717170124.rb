@@ -31,8 +31,8 @@ class ProductsController < ApplicationController
       case params[:filter]
       when 'new'
         @products = @products.where('created_at >= ?', 3.days.ago)
-      when 'on_sale'
-        @products = @products.where(on_sale_status: true)
+      when 'On_Sale'
+        @products = @products.where(on_sale: true)
       end
     end
 

@@ -23,7 +23,7 @@
           <div class="field">
           <%= form_tag(filter_products_path, method: :get, class: 'navbar-item', id: 'filter-form') do %>
             <div class="select is-dark control">
-              <%= select_tag(:filter, options_for_select({ 'New' => 'new', 'On_sale' => 'on_sale' }, params[:filter]), include_blank: 'All', id: 'filter-select') %>
+              <%= select_tag(:filter, options_for_select({ 'new' => 'New', 'on_sale' => 'On Sale' }, params[:filter]), include_blank: 'All', id: 'filter-select') %>
             </div>
           </div>
         </div>

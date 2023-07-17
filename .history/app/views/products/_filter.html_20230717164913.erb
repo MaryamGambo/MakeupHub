@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="field is-horizontal">
+    <div class="field-label is-normal">
+      <label class="label">Select Category</label>
+    </div>
+    <div class="field-body">
+      <div class="field">
+        <%= form_tag(filter_by_category_products_path, method: :get, class: 'navbar-item', id: 'category-form') do %>
+          <div class="select is-dark control">
+            <%= select_tag(:type_id, options_for_select(Type.all.map { |t| [t.name, t.id] }, params[:type_id]), include_blank: 'All Categories', id: 'category-select') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%= form_tag(filter_products_path, method: :get, class: 'navbar-item', id: 'filter-form') do %>
+    <div class="field is-horizontal">
+      <div class="field-label is-normal">
+        <label class="label">Filter By</label>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <%= select_tag(:filter, options_for_select({ 'new' => 'New', 'on_sale' => 'On Sale' }, params[:filter]), include_blank: 'All') %>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const categoryForm = document.getElementById('category-form');
+
+    categoryForm.addEventListener('change', function(event) {
+      event.preventDefault();
+      if (event.target.id === 'category-select') {
+        categoryForm.submit();
+      }
+    });
+    });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterSelect = document.getElementById('filter-select');
+    filterSelect.addEventListener('change', function() {
+      document.getElementById('filter-form').submit();
+    });
+  });
+
+</script>
+

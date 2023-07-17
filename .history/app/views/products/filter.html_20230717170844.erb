@@ -1,10 +1,9 @@
 <!-- app/views/products/filter.html.erb -->
 <div class="container">
   <%= render partial: 'filter' %>
+  <%= paginate @products %>
 
-
- <div class="container box">
-   <%= paginate @products %>
+ <div class="container">
   <% if params[:filter].present? %>
     <% if params[:filter] == 'new' %>
       <% if @products.empty? %>

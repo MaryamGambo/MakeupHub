@@ -32,7 +32,7 @@ class ProductsController < ApplicationController
       when 'new'
         @products = @products.where('created_at >= ?', 3.days.ago)
       when 'on_sale'
-        @products = @products.where(on_sale_status: true)
+        @products = @products.where(on_sale: true)
       end
     end
 

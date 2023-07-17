@@ -25,19 +25,17 @@ class ProductsController < ApplicationController
 
   # navigate through products by filters: on-sale,new,  and recently-updated
   def filter
-    @products = Product.all
+    @products = Product.page(params[:page]).per(15)
 
-    if params[:filter].present?
-      case params[:filter]
-      when 'new'
-        @products = @products.where('created_at >= ?', 3.days.ago)
-      when 'on_sale'
-        @products = @products.where(on_sale_status: true)
-      end
+    if params[:new].present?
+      @products = @products.where('created_at >= ?', 3.days.ago.beginning_of_day)
     end
 
-    # You may also want to paginate the results
-    @products = @products.page(params[:page]).per(15)
+    if params[:on_sale].present?
+      @products = @products.where(on_sale_status: true)
+    end
+
+    @products = @products.order(created_at: :desc)
   end
 
   # navigate products by types category
