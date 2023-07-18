@@ -1,0 +1,49 @@
+<div class="container">
+   <%= render partial: 'filter'%>
+     <div class="container box">
+   <%= paginate @products %>
+    <% if @type %>
+        <h2 class="title is-4">Products with Type: <%= @type.name %></h2>
+         <div class="columns is-multiline ">
+        <% @products.each do |product| %>
+            <%= render product%>
+        <%end%>
+        </div>
+    <% elsif @category %>
+        <h2 class="title is-4">Products with Category: <%= @category.name %></h2>
+         <div class="columns is-multiline ">
+        <% @products.each do |product| %>
+            <%= render product%>
+        <%end%>
+        </div>
+    <% elsif @brand %>
+        <h2 class="title is-4">Products with Brand: <%= @brand.name %></h2>
+         <div class="columns is-multiline ">
+        <% @products.each do |product| %>
+            <%= render product%>
+        <%end%>
+        </div>
+    <% elsif @tag %>
+    <h2 class="title is-4">Products with Tag: <%= @tag.name %></h2>
+        <div class="columns is-multiline ">
+        <% @products.each do |product| %>
+            <%= render product%>
+        <%end%>
+    </div>
+    <% else %>
+        <h2 class="title is-4">All Products</h2>
+         <div class="columns  is-multiline">
+        <% @products.each do |product| %>
+                <%= render product%>
+        <%end%>
+         </div>
+    <%end%>
+
+
+    <% if @products.empty? %>
+        <h3>No products found in <%= @association_name %>.</h3>
+    <% end %>
+</div>
+</div>
+
+
