@@ -7,7 +7,7 @@ module ApplicationHelper
 
     # Add the first-level breadcrumb if applicable (e.g., products)
     if @product
-      breadcrumbs << link_to(@product.brand.name, brand_products_path(@product.brand))
+      breadcrumbs << link_to(@product.brand.name, category_path(@product.category))
     end
 
     # Add the second-level breadcrumb if applicable (e.g., categories)

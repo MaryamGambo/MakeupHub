@@ -24,8 +24,8 @@ class ProductsController < ApplicationController
     @category = @product.category
     @brand = @product.brand
     @other_products = @category.products.where.not(id: @product.id)
-    @tags = @product.tags
 
+    set_breadcrumb
   end
 
 
@@ -75,13 +75,13 @@ class ProductsController < ApplicationController
     @products = @products.page(params[:page]).per(15)
   end
 
-  # private
+  private
 
-  # def set_breadcrumb
-  #   breadcrumb('Home', root_path)
-  #   breadcrumb('Brands', brands_path)
-  #   breadcrumb(@brand.name, brand_products_path(@brand))
-  #   breadcrumb(@product.name, product_path(@product))
-  # end
+  def set_breadcrumb
+    breadcrumb('Home', root_path)
+    breadcrumb('Brands', categories_path)
+    breadcrumb(@category.name, category_path(@category))
+    breadcrumb(@product.name, product_path(@product))
+  end
 
 end

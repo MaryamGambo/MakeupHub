@@ -24,11 +24,7 @@ class ProductsController < ApplicationController
     @category = @product.category
     @brand = @product.brand
     @other_products = @category.products.where.not(id: @product.id)
-    @tags = @product.tags
-
   end
-
-
 
   # navigate through products by filters: on-sale,new,  and recently-updated
   def filter
@@ -57,6 +53,9 @@ class ProductsController < ApplicationController
   end
 
 
+
+
+
   # search products by keywords and categories
   def search
     @products = Product.all
@@ -74,14 +73,5 @@ class ProductsController < ApplicationController
     @total_results = @products.size
     @products = @products.page(params[:page]).per(15)
   end
-
-  # private
-
-  # def set_breadcrumb
-  #   breadcrumb('Home', root_path)
-  #   breadcrumb('Brands', brands_path)
-  #   breadcrumb(@brand.name, brand_products_path(@brand))
-  #   breadcrumb(@product.name, product_path(@product))
-  # end
 
 end

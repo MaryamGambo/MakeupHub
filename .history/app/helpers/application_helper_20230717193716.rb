@@ -3,11 +3,11 @@ module ApplicationHelper
     breadcrumbs = []
 
     # Add the root breadcrumb
-    breadcrumbs << link_to('Products', root_path)
+    breadcrumbs << link_to('Home', root_path)
 
     # Add the first-level breadcrumb if applicable (e.g., products)
     if @product
-      breadcrumbs << link_to(@product.brand.name, brand_products_path(@product.brand))
+      breadcrumbs << link_to(@product.category.name, category_path(@product.category))
     end
 
     # Add the second-level breadcrumb if applicable (e.g., categories)

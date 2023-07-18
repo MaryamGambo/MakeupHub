@@ -24,7 +24,6 @@ class ProductsController < ApplicationController
     @category = @product.category
     @brand = @product.brand
     @other_products = @category.products.where.not(id: @product.id)
-    @tags = @product.tags
 
   end
 
