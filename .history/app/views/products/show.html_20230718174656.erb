@@ -25,7 +25,8 @@
         <p>On Sale: <%= @product.on_sale_status ? 'Yes' : 'No' %></p>
       </div>
 
-      <%= form_tag add_to_cart_product_path(@product), method: :post do %>
+      <%= form_tag cart_update_path, method: :put do %>
+        <%= hidden_field_tag :product_id, @product.id %>
         <%= label_tag :quantity, 'Quantity:' %>
         <%= number_field_tag :quantity, 1, min: 1 %>
         <%= submit_tag 'Add to Cart' %>
