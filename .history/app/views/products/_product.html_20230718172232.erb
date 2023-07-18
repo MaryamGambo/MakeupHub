@@ -1,0 +1,16 @@
+
+<div class="column is-one-third">
+  <div class="card">
+    <% if product.image.attached? %>
+      <div class="card-image">
+        <%= image_tag product.image.variant(resize_to_limit: [100, 100])%>
+      </div>
+    <% end %>
+    <div class="card-content">
+      <h1 class="title is-size-4-touch"><%= link_to product.name, product %></h1>
+      <p><%= product.brand.name %></p>
+      <p>Price: <%= product.price %></p>
+      <p>On Sale: <%= product.on_sale_status ? 'Yes' : 'No' %></p>
+    </div>
+  </div>
+</div>
