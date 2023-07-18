@@ -2,14 +2,14 @@
   <div class="columns">
     <div class="column is-one-third">
       <% if @product.image.attached? %>
-      <figure class="image is-3by5">
+      <figure class="image is-3by4">
         <%= image_tag @product.image %>
         </figure>
       <% end %>
     </div>
     <div class="column">
       <div class="product-full-details">
-        <h1 class="title is-1"><%= @product.name %></h1>
+        <h1 class="title is-3"><%= @product.name %></h1>
         <p>Brand: <%= link_to @product.brand.name, products_path(brand_id: @product.brand_id) %></p>
         <p>Type: <%= link_to @product.type.name, products_path(type_id: @product.type_id) %></p>
         <p>Category: <%= link_to @product.category.name, products_path(category_id: @product.category_id) %></p>
@@ -17,7 +17,7 @@
         <p>Description: <%= @product.description %></p>
         <p>On Sale: <%= @product.on_sale_status ? 'Yes' : 'No' %></p>
       </div>
-      <%= link_to "Back to all products", products_path, class: "button is-info mt-6" %>
+      <%= link_to "Back to all products", products_path, class: "button is-info" %>
     </div>
   </div>
 </div>
