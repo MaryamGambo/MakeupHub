@@ -16,11 +16,11 @@
         <p>Price: <%= @product.price %></p>
         <p>Description: <%= @product.description %></p>
         <% if @tags.any? %>
-          <ul>Tags:
+          <p>Tags:
             <% @tags.each do |tag| %>
-              <li><%= link_to tag.name, tag_products_path(tag) %></li>
+              <%= link_to tag.name, tag_products_path(tag) %> <!-- Replace "#" with the path or URL to display individual tag details if needed -->
             <% end %>
-          </ul>
+          </p>
         <% end %>
         <p>On Sale: <%= @product.on_sale_status ? 'Yes' : 'No' %></p>
       </div>

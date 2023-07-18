@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :tags do
-  resources :products, only: [:index, :show]
+  resources :products, only: [:index, show]
 end
 
 

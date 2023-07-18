@@ -24,11 +24,11 @@
         <%end%>
         </div>
     <% elsif @tag %>
-    <h2 class="title is-4">Products with Tag: <%= @tag.name %></h2>
+    <h2 class="title is-4">Products with Brand: <%= @brand.name %></h2>
         <div class="columns is-multiline ">
-        <% @products.each do |product| %>
-            <%= render product%>
-        <%end%>
+    <% @products.each do |product| %>
+        <%= render product%>
+    <%end%>
     </div>
     <% else %>
         <h2 class="title is-4">All Products</h2>

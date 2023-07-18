@@ -14,9 +14,9 @@ class ProductsController < ApplicationController
       @products = @brand.products.page(params[:page]).per(15)
       @association_name = @brand.name
     elsif params[:tag_id]
-      @tag = Tag.find(params[:tag_id])
-      @products = @tag.products.page(params[:page]).per(15)
-      @association_name = @tag.name
+      @film = Film.find(params[:film_id])
+      @people = @film.people.page(params[:page]).per(15)
+      @association_name = @film.title
     else
       @products = Product.page(params[:page]).per(15)
     end
