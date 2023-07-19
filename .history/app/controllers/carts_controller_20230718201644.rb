@@ -23,6 +23,6 @@ class CartsController < ApplicationController
 
     session[:cart] = cart
 
-    redirect_to cart_path, flash: { remove_success: 'Product removed from cart successfully.' }
+    redirect_to cart_path, notice: 'Product removed from cart successfully.'
   end
 end

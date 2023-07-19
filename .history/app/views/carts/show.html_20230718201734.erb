@@ -7,17 +7,10 @@
 
     <% if flash[:update_success] %>
       <div class="notification is-success flash-message">
-        <%= flash[:update_success] %>
+        <%= flash[:added_success] %>
       </div>
       <meta http-equiv="refresh" content="5;url=<%= request.original_url %>">
     <% end %>
-
-    <% if flash[:remove_success] %>
-        <div class="notification is-success flash-message">
-          <%= flash[:remove_success] %>
-        </div>
-        <meta http-equiv="refresh" content="5;url=<%= request.original_url %>">
-      <% end %>
 
 
 
