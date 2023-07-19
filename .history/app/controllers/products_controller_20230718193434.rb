@@ -88,8 +88,8 @@ class ProductsController < ApplicationController
     cart[product_id] += quantity
 
     session[:cart] = cart
-    redirect_to cart_path, flash: { added_success: 'Product added to cart successfully.' }
-
+    redirect_to products_path
+    flash[:success] = 'Product added to cart successfully.'
   end
 
   # private

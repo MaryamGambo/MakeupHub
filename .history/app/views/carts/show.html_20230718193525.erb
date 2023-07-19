@@ -1,11 +1,8 @@
-   <% if flash[:added_success] %>
-        <div class="notification is-success flash-message">
-          <%= flash[:added_success] %>
+   <% if flash[:success] %>
+        <div class="notification is-success">
+          <%= flash[:success] %>
         </div>
-        <meta http-equiv="refresh" content="5;url=<%= request.original_url %>">
       <% end %>
-
-
 
 <table>
   <thead>

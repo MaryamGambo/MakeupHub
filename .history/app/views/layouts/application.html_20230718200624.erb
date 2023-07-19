@@ -10,12 +10,15 @@
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-DfXdHTHR01Z/B5Ug+a2+Cqkd2p4WJn4YlFvb4cJ9ZDK6zZVjJt7hxRJr1I5tN9Fv" crossorigin="anonymous">
 
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag 'flash_messages' %>
 
   </head>
 
   <body>
       <%= render 'shared/menu' %>
     <section class="section">
+
+
       <%= yield %>
     </section>
 
