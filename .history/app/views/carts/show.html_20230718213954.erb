@@ -37,7 +37,7 @@
       <% total_price += product_price %>
       <tr>
         <td><%= image_tag(product.image.variant(resize_to_fill: [100, 100])) %></td>
-        <td><%= product.name %></td>
+         <td><%= product.name %></td>
         <td>
           <%= form_tag cart_update_path, method: :put do %>
             <%= hidden_field_tag :product_id, product.id %>
