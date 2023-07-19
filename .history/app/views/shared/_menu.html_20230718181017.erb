@@ -24,8 +24,7 @@
           </span>
           <span>Cart (<%= session[:cart]&.values&.sum || 0 %>)</span>
         <% end %>
-    </div>
-
+      </div>
     <div class="navbar-end">
       <%= form_tag(search_products_path, method: :get, class: 'navbar-item') do %>
         <div class="navbar-item has-background-dark">

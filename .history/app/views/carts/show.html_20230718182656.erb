@@ -1,4 +1,4 @@
-
+<%= @cart.inspect %>
 
 <table>
   <thead>
@@ -9,7 +9,9 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody>
+  <%
+=begin%>
+ <tbody>
     <% @cart.each do |product_id, quantity| %>
       <% product = Product.find(product_id) %>
       <tr>
@@ -28,4 +30,6 @@
       </tr>
     <% end %>
   </tbody>
+<%
+=end%>
 </table>
