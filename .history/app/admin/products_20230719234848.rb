@@ -16,8 +16,7 @@ ActiveAdmin.register Product do
         f.input :image, as: :file, hint: image_tag(f.object.image.variant(resize_to_fill: [100, 100]))
       else
         f.input :image, as: :file
-      end
-    end
+
     f.actions         # adds the 'Submit' and 'Cancel' buttons
   end
 

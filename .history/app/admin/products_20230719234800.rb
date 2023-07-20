@@ -11,12 +11,12 @@ ActiveAdmin.register Product do
   form do |f|
     f.semantic_errors # shows errors on :base
     f.inputs          # builds an input field for every attribute
+
+
+    f.input :image, as: :file, hint: f.object.image.attached? ? image_tag(f.object.image.variant(resize_to_fill: [100, 100])) : content_tag(:span, 'No image yet')
+
     f.inputs do
-      if f.object.image.attached?
-        f.input :image, as: :file, hint: image_tag(f.object.image.variant(resize_to_fill: [100, 100]))
-      else
-        f.input :image, as: :file
-      end
+      f.input :image, as: :file
     end
     f.actions         # adds the 'Submit' and 'Cancel' buttons
   end

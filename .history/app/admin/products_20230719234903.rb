@@ -17,7 +17,6 @@ ActiveAdmin.register Product do
       else
         f.input :image, as: :file
       end
-    end
     f.actions         # adds the 'Submit' and 'Cancel' buttons
   end
 
