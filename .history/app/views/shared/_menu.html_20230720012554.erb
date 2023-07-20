@@ -17,8 +17,8 @@
 
     <div class="navbar-item has-text-centered">
       <%= form_tag(search_products_path, method: :get, class: 'field has-addons') do %>
-      <div class="control">
-        <div class="select">
+      <div class="select">
+        <div class="control">
           <%= select_tag(:type_id, options_for_select(Type.all.map { |p| [p.name, p.id] }), include_blank: 'All', class: 'select is-dark') %>
         </div>
         </div>
