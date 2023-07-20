@@ -13,7 +13,7 @@
 
 <!-- On-Sale Products -->
 <div class="container mt-6 box">
-  <h2 class="title is-3">Today's Deals </h2>
+  <h2 class="title is-3">On-Sale Products <%= link_to 'View More Deals', product_path(product_item), class: 'button is-primary is-outlined mt-3' %></h2>
   <div class="columns is-multiline">
     <% @on_sale_products.each do |product_item| %>
       <div class="column">

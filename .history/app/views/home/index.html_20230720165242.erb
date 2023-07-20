@@ -13,7 +13,7 @@
 
 <!-- On-Sale Products -->
 <div class="container mt-6 box">
-  <h2 class="title is-3">Today's Deals </h2>
+  <h2 class="title is-3">On-Sale Products</h2>
   <div class="columns is-multiline">
     <% @on_sale_products.each do |product_item| %>
       <div class="column">
@@ -24,6 +24,7 @@
             </div>
           <% end %>
           <div class="card-content">
+          <div>
             <h1 class="title is-size-5-touch is-truncated"><%= link_to product_item.name, product_item %></h1>
             <p class="is-truncated"><%= product_item.brand.name %></p>
             <div class="columns is-mobile">
@@ -87,21 +88,40 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style>
 .is-purple-border {
   border-color: purple;
   color: purple; /* Optional: This will change the text color to purple as well */
 }
-
- .equal-height-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-
-  .card-content {
-    flex: 1;
-  }
 
 </style>

@@ -1,0 +1,71 @@
+<!-- Available Types of Products -->
+<div class="container">
+  <h2 class= "title is-3">Available Types of Products</h2>
+  <div class="columns">
+    <% @available_types.each do |type| %>
+      <div class="column">
+        <h3><%= type.name %></h3>
+        <%= link_to 'Shop now', products_path(type_id: type.id), class: 'button mt-3' %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to 'View More', products_path, class: 'button is-link' %>
+</div>
+
+<!-- On-Sale Products -->
+<div class="container mt-6">
+  <h2 class= "title is-3">On-Sale Products</h2>
+  <div class="columns">
+    <% @on_sale_products.each do |product| %>
+      <div class="column">
+        <div class="card">
+          <% if product.image.attached? %>
+            <div class="card-image">
+              <%= image_tag product.image.variant(resize_to_fill: [800, 600])%>
+            </div>
+          <% end %>
+          <div class="card-content">
+             <h1 class="title is-size-5-touch"><%= link_to product.name, product %></h1>
+             <p><%= product.brand.name %></p>
+             <% if product.on_sale_status %>
+                <p class="has-text-weight-bold"><span class="has-text-danger">-10%</span> $<%= (product.price * 0.9).round(2) %></p>
+                <p class="has-text-decoration-line-through has-text-grey"><s>Price: $<%= product.price %></s></p>
+             <% else %>
+                <p>Price: $<%= product.price %></p>
+              <% end %>
+         </div>
+         <%= link_to 'View', product_path(product), class: 'button mt-3' %>
+       </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- Recently Updated Products -->
+<div class="container mt-6">
+  <h2 class= "title is-3">Recently Updated Products</h2>
+  <div class="columns">
+    <% @recently_updated_products.each do |product_item| %>
+      <div class="column">
+        <div class="card">
+           <% if product.image.attached? %>
+              <div class="card-image">
+                  <%= image_tag product.image.variant(resize_to_fill: [800, 600])%>
+              </div>
+            <% end %>
+            <div class="card-content">
+               <h1 class="title is-size-5-touch"><%= link_to product.name, product %></h1>
+               <p><%= product_item.brand.name %></p>
+               <% if product_item.on_sale_status %>
+                  <p class="has-text-weight-bold"><span class="has-text-danger">-10%</span> $<%= (product.price * 0.9).round(2) %></p>
+                  <p class="has-text-decoration-line-through has-text-grey"><s>Price: $<%= product.price %></s></p>
+               <% else %>
+                 <p>Price: $<%= product.price %></p>
+               <% end %>
+            </div>
+        </div>
+        <%= link_to 'View',product_path(product), class: 'button mt-3' %>
+      </div>
+    <% end %>
+  </div>
+</div>

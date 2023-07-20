@@ -1,0 +1,57 @@
+<!-- Available Types of Products -->
+<div class="container">
+  <h2>Available Types of Products</h2>
+  <div class="columns">
+    <% @available_types.each do |type| %>
+      <div class="column">
+        <h3><%= type.name %></h3>
+        <%= link_to 'View', products_path(type: type.id), class: 'button' %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to 'View More', products_path, class: 'button is-link' %>
+</div>
+
+<!-- On-Sale Products -->
+<div class="container">
+  <h2>On-Sale Products</h2>
+  <div class="columns">
+    <% @on_sale_products.each do |product| %>
+      <div class="column">
+        <div class="card">
+          <% if product.image.attached? %>
+            <div class="card-image">
+              <%= image_tag product.image.variant(resize_to_fill: [800, 600])%>
+            </div>
+          <% end %>
+          <div class="card-content">
+             <h1 class="title is-size-4-touch"><%= link_to product.name, product %></h1>
+             <p><%= product.brand.name %></p>
+             <% if product.on_sale_status %>
+                <p class="original-price"><s>Price: $<%= product.price %></s></p>
+                <p class="sale-price">Sale Price: <strong>$<%= (product.price * 0.9).round(2) %></strong></p>
+             <% else %>
+                <p>Price: $<%= product.price %></p>
+              <% end %>
+         </div>
+       </div>
+        <%= link_to 'View', product_path(product), class: 'button' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<!-- Recently Updated Products -->
+<div class="container">
+  <h2>Recently Updated Products</h2>
+  <div class="columns">
+    <% @recently_updated_products.each do |product| %>
+      <div class="column">
+        <h3><%= product.name %></h3>
+        <p><%= product.description %></p>
+        <p>Price: $<%= product.price %></p>
+        <%= link_to 'View', product_path(product), class: 'button' %>
+      </div>
+    <% end %>
+  </div>
+</div>

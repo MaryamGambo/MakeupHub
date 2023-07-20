@@ -13,7 +13,7 @@
 
 <!-- On-Sale Products -->
 <div class="container mt-6 box">
-  <h2 class="title is-3">Today's Deals </h2>
+  <h2 class="title is-3">On-Sale Products</h2>
   <div class="columns is-multiline">
     <% @on_sale_products.each do |product_item| %>
       <div class="column">
@@ -24,21 +24,21 @@
             </div>
           <% end %>
           <div class="card-content">
+          <div>
             <h1 class="title is-size-5-touch is-truncated"><%= link_to product_item.name, product_item %></h1>
             <p class="is-truncated"><%= product_item.brand.name %></p>
-            <div class="columns is-mobile">
-            <div class="column">
             <% if product_item.on_sale_status %>
-              <p class="has-text-weight-bold"><span class="has-text-danger">-10%</span> $<%= (product_item.price * 0.9).round(2) %></p>
-              <p class="has-text-decoration-line-through has-text-grey"><s>Price: $<%= product_item.price %></s></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="has-text-weight-bold"><span class="has-text-danger">-10%</span> $<%= (product_item.price * 0.9).round(2) %></p>
+                <p class="has-text-decoration-line-through has-text-grey"><s>Price: $<%= product_item.price %></s></p>
+                <%= link_to 'View', product_path(product_item), class: 'button mt-3' %>
+              </div>
             <% else %>
-               <p>Price: $<%= product_item.price %></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <p>Price: $<%= product_item.price %></p>
+                <%= link_to 'View', product_path(product_item), class: 'button mt-3' %>
+              </div>
             <% end %>
-          </div>
-          <div class="column is-narrow">
-             <%= link_to 'View', product_path(product_item), class: 'button is-primary is-outlined mt-3' %>
-           </div>
-          </div>
           </div>
         </div>
       </div>
@@ -50,7 +50,7 @@
 
 <!-- Recently Added Products -->
 <div class="container box mt-6">
-  <h2 class="title is-3">Recently Added Products</h2>
+  <h2 class="title is-3">Recently Updated Products</h2>
   <div class="columns is-multiline">
     <% @recently_updated_products.each do |product_item| %>
       <div class="column">
@@ -87,21 +87,40 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style>
 .is-purple-border {
   border-color: purple;
   color: purple; /* Optional: This will change the text color to purple as well */
 }
-
- .equal-height-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-  }
-
-  .card-content {
-    flex: 1;
-  }
 
 </style>
