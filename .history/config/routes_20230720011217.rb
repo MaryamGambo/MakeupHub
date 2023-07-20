@@ -40,7 +40,7 @@ end
   get 'cart', to: 'carts#show'
   put 'cart/update', to: 'carts#update'
   delete 'cart/remove', to: 'carts#remove'
-  get 'pages/:permalink', to: 'pages#permalink', as: 'permalink'
+  get 'pages/:permalink' to: 'pages#permalink', as: 'permalink' :pages, only: [:show]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

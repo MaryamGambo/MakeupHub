@@ -6,6 +6,6 @@ class PagesController < ApplicationController
   end
 
   def show
-
+    @page = Page.find_by(params[:id])
   end
 end
