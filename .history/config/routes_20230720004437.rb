@@ -42,7 +42,7 @@ end
   get 'cart', to: 'carts#show'
   put 'cart/update', to: 'carts#update'
   delete 'cart/remove', to: 'carts#remove'
-  resources :pages, only: [:show]
+  resources :pages, only: [:show], param: :title
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

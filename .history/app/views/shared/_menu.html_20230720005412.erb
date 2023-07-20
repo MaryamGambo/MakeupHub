@@ -11,8 +11,8 @@
   <div class="navbar-menu has-background-dark" id="navbarNav">
     <div class="navbar-start">
       <a class="navbar-item has-text-white" href="<%= root_path %>">Products</a>
-      <%= link_to 'About Us', page_path(1), class: 'navbar-item has-text-white' %>
-      <%= link_to 'Contact Us', page_path(2), class: 'navbar-item has-text-white' %>
+      <%= link_to 'About Us', page_path(:id), class: 'navbar-item has-text-white' %>
+      <%= link_to 'Contact Us', page_path('contact'), class: 'navbar-item has-text-white' %>
     </div>
 
     <div class="navbar-item has-text-centered">
