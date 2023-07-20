@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  get 'page/show'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # get 'carts/show'
@@ -42,7 +42,6 @@ end
   get 'cart', to: 'carts#show'
   put 'cart/update', to: 'carts#update'
   delete 'cart/remove', to: 'carts#remove'
-  get 'page/show'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
