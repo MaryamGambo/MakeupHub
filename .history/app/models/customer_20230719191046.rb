@@ -1,6 +1,6 @@
 class Customer < ApplicationRecord
-  belongs_to :primary_province, class_name: 'Province', optional: true
-  belongs_to :alt_province, class_name: 'Province', optional: true
+  belongs_to :primary_province, class_name: 'Province'
+  belongs_to :alt_province, class_name: 'Province'
   has_many :orders
 
   validates :first_name, :last_name, length: { maximum: 100 }
