@@ -32,7 +32,7 @@ ActiveAdmin.register Product do
     id_column
     column :image do |product|
       if product.image.attached?
-        image_tag product.image.variant(resize_to_limit: [50, 50])
+        image_tag product.image.variant(resize_to_limit: [100, 100])
       else
         "No image attached"
       end
@@ -44,14 +44,10 @@ ActiveAdmin.register Product do
     column :price
     column :on_sale_status
     column :tags do |product|
-      tags = product.tags.map(&:name).join(', ')
-      tags.present? ? tags : 'N/A'
+      product.tags.each do |tag|
+        span tag.name
+      end
     end
-    # column :tags do |product|
-      # product.tags.each do |tag|
-        # span tag.name
-      # end
-    # end
     column :created_at
     column :updated_at
     actions
@@ -80,6 +76,8 @@ ActiveAdmin.register Product do
           span tag.name
         end
       end
+
+
     end
     active_admin_comments
   end

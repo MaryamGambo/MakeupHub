@@ -44,10 +44,10 @@ ActiveAdmin.register Product do
     column :price
     column :on_sale_status
     column :tags do |product|
-      tags = product.tags.map(&:name).join(', ')
+      tags = tags.pluck(:name).join(', ')
       tags.present? ? tags : 'N/A'
     end
-    # column :tags do |product|
+    # column :tags do |produc|
       # product.tags.each do |tag|
         # span tag.name
       # end

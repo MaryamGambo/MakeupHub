@@ -8,8 +8,6 @@ ActiveAdmin.register Product do
   #
   permit_params :name, :brand_id, :type_id, :category_id, :price, :description, :on_sale_status, :image, tag_ids:[]
 
-
-   # edit and new form page
   form do |f|
     f.semantic_errors # shows errors on :base
     f.inputs          # builds an input field for every attributes
@@ -26,17 +24,9 @@ ActiveAdmin.register Product do
   end
 
 
-   # index page
   index do
     selectable_column
     id_column
-    column :image do |product|
-      if product.image.attached?
-        image_tag product.image.variant(resize_to_limit: [50, 50])
-      else
-        "No image attached"
-      end
-    end
     column :name
     column :brand
     column :type
@@ -44,44 +34,11 @@ ActiveAdmin.register Product do
     column :price
     column :on_sale_status
     column :tags do |product|
-      tags = product.tags.map(&:name).join(', ')
-      tags.present? ? tags : 'N/A'
+      product.tags.map(&:name).join(', ')
     end
-    # column :tags do |product|
-      # product.tags.each do |tag|
-        # span tag.name
-      # end
-    # end
     column :created_at
     column :updated_at
     actions
-  end
-
-  # show page
-  show do
-    attributes_table do
-      row :id
-      row :name
-      row :brand
-      row :type
-      row :category
-      row :price
-      row :description
-      row :on_sale_status
-      row :image do |product|
-        if product.image.attached?
-          image_tag product.image.variant(resize_to_limit: [200, 200])
-        else
-          "No image attached"
-        end
-      end
-      row :tags do |product|
-        product.tags.each do |tag|
-          span tag.name
-        end
-      end
-    end
-    active_admin_comments
   end
 
 
