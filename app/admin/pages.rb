@@ -12,7 +12,7 @@ ActiveAdmin.register Page do
     f.semantic_errors
     f.inputs do
       f.input :title
-      f.input :content, as: :text, input_html: { class: 'redactor' }
+      f.input :content, as: :rich_text
       f.input :permalink
     end
     f.actions
