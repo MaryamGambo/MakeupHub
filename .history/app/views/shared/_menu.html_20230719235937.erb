@@ -1,0 +1,46 @@
+<nav class="navbar is-dark" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="<%= root_path %>">MAKEUP HUB</a>
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+      data-target="navbarNav">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu has-background-dark" id="navbarNav">
+    <div class="navbar-start">
+      <a class="navbar-item has-text-white" href="<%= root_path %>">Products</a>
+      <a class="navbar-item has-text-white" href="<%= about_path %>">About Us</a>
+      <a class="navbar-item has-text-white" href="<%= contact_path %>">Contact Us</a>
+    </div>
+
+    <div class="navbar-end">
+      <%= form_tag(search_products_path, method: :get, class: 'navbar-item') do %>
+        <div class="field has-addons"> <!-- Use Bulma field and addons for search input and select -->
+          <div class="control">
+            <%= text_field_tag(:keyword, params[:keyword], id: 'keyword-input', placeholder: 'Search by Keyword', class: 'input') %>
+          </div>
+          <div class="control">
+            <div class="select is-dark">
+              <%= select_tag(:type_id, options_for_select(Type.all.map { |p| [p.name, p.id] }), include_blank: 'All') %>
+            </div>
+          </div>
+          <div class="control">
+            <%= submit_tag('Search', class: 'button is-primary') %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="navbar-item">
+        <%= link_to cart_path, class: 'button is-info' do %>
+          <span class="icon">
+            <i class="fas fa-shopping-cart"></i>
+          </span>
+          <span>Cart (<%= session[:cart]&.values&.sum || 0 %>)</span>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

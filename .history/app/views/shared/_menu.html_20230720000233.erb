@@ -16,15 +16,15 @@
       <a class="navbar-item has-text-white" href="<%= contact_path %>">Contact Us</a>
     </div>
 
-    <div class="navbar-item has-text-centered">
+    <div class="navbar-item has-text-centered"> <!-- Center the search details -->
       <%= form_tag(search_products_path, method: :get, class: 'field has-addons') do %>
-       <div class="control">
-          <div class="select is-dark ">
-           <%= select_tag(:type_id, options_for_select(Type.all.map { |p| [p.name, p.id] }), include_blank: 'All') %>
-         </div>
-       </div>
         <div class="control">
           <%= text_field_tag(:keyword, params[:keyword], id: 'keyword-input', placeholder: 'Search by Keyword', class: 'input') %>
+        </div>
+        <div class="control">
+          <div class="select is-dark "> <!-- Make the category input smaller -->
+            <%= select_tag(:type_id, options_for_select(Type.all.map { |p| [p.name, p.id] }), include_blank: 'All') %>
+          </div>
         </div>
         <div class="control">
           <%= submit_tag('Search', class: 'button is-primary') %>
@@ -32,7 +32,7 @@
       <% end %>
     </div>
 
-    <div class="navbar-item">
+    <div class="navbar-end">
       <%= link_to cart_path, class: 'button is-info' do %>
         <span class="icon">
           <i class="fas fa-shopping-cart"></i>
