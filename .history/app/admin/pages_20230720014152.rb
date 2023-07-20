@@ -12,7 +12,7 @@ ActiveAdmin.register Page do
     f.semantic_errors
     f.inputs do
       f.input :title
-      f.input :content
+      f.input :content,
       f.input :permalink
     end
     f.actions
