@@ -1,0 +1,82 @@
+<footer class="footer is-dark">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <h3 class="footer-title is-3">Makeup Hub</h3>
+        <p class="footer-content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.</p>
+      </div>
+      <div class="column">
+        <h3 class="footer-title is-3">Explore</h3>
+        <ul class="footer-links">
+          <li><%= link_to 'Home', root_path %></li>
+          <li><%= link_to 'Products', products_path %></li>
+          <%= link_to 'About Us', permalink_path('about_us'), class: 'navbar-item has-text-white' %>
+          <%= link_to 'Contact Us', permalink_path('contact_us'), class: 'navbar-item has-text-white' %>
+        </ul>
+      </div>
+      <div class="column">
+        <h3 class="footer-title is-3">Follow Us</h3>
+        <p class="footer-social">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Custom Footer Styling */
+  .footer {
+    background-color: #333;
+    color: #fff;
+    padding: 2rem 0;
+  }
+
+  .footer-title {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-content {
+    color: #fff;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-links a {
+    color: #fff;
+    opacity: 0.8;
+  }
+
+  .footer-links a:hover {
+    opacity: 1;
+  }
+
+  .footer-social {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .footer-social {
+  display: flex;
+ }
+
+ .footer-social a {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 1.5rem;
+  opacity: 0.8;
+ }
+
+  .footer-social a:hover {
+    opacity: 1;
+  }
+</style>
