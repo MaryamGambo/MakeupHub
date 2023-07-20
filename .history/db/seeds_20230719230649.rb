@@ -82,8 +82,8 @@ products_data.first(200).each do |product_data|
     price: product_data['price'].to_f,
     description: product_data['description'],
     on_sale_status: on_sale,
-    created_at: product_data['created_at'],
-    updated_at: product_data['updated_at']
+    # created_at: product_data['created_at'],
+    # updated_at: product_data['updated_at']
   )
 
 # Attach image if available
