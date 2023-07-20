@@ -6,15 +6,6 @@ ActiveAdmin.register Page do
   # Uncomment all parameters which should be permitted for assignment
   #
   permit_params :title, :content
-
-  form do |f|
-    f.semantic_errors
-    f.inputs do
-      f.input :title
-      f.input :content, as: :text, input_html: { class: 'redactor' }
-    end
-    f.actions
-  end
   #
   # or
   #

@@ -1,7 +1,8 @@
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+<nav class="navbar is-dark" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="<%= root_path %>">MAKEUP HUB</a>
-    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarNav">
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+      data-target="navbarNav">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -17,9 +18,11 @@
 
     <div class="navbar-item has-text-centered">
       <%= form_tag(search_products_path, method: :get, class: 'field has-addons') do %>
-        <div class="control">
-          <%= select_tag(:type_id, options_for_select(Type.all.map { |p| [p.name, p.id] }), include_blank: 'All', class: 'select is-dark') %>
-        </div>
+       <div class="control">
+          <div class="select is-dark ">
+           <%= select_tag(:type_id, options_for_select(Type.all.map { |p| [p.name, p.id] }), include_blank: 'All') %>
+         </div>
+       </div>
         <div class="control">
           <%= text_field_tag(:keyword, params[:keyword], id: 'keyword-input', placeholder: 'Search by Keyword', class: 'input') %>
         </div>
@@ -29,7 +32,7 @@
       <% end %>
     </div>
 
-    <div class="navbar-end">
+    <div class="navbar-item">
       <%= link_to cart_path, class: 'button is-info' do %>
         <span class="icon">
           <i class="fas fa-shopping-cart"></i>
