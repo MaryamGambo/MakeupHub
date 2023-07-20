@@ -1,4 +1,4 @@
-ActiveAdmin.register Type do
+ActiveAdmin.register Category do
   config.filters = false
 
   # See permitted parameters documentation:

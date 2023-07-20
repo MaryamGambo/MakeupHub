@@ -1,4 +1,4 @@
-ActiveAdmin.register Type do
+ActiveAdmin.register Product do
   config.filters = false
 
   # See permitted parameters documentation:
@@ -6,12 +6,12 @@ ActiveAdmin.register Type do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :name
+  permit_params :name, :brand_id, :type_id, :category_id, :price, :description, :on_sale_status
   #
   # or
   #
   # permit_params do
-  #   permitted = [:name]
+  #   permitted = [:name, :brand_id, :type_id, :category_id, :price, :description, :on_sale_status]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end

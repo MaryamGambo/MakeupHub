@@ -1,4 +1,4 @@
-ActiveAdmin.register Type do
+ActiveAdmin.register Province do
   config.filters = false
 
   # See permitted parameters documentation:
@@ -6,12 +6,12 @@ ActiveAdmin.register Type do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-   permit_params :name
+  permit_params :name, :tax_type, :GST, :PST, :HST
   #
   # or
   #
   # permit_params do
-  #   permitted = [:name]
+  #   permitted = [:name, :tax_type, :GST, :PST, :HST]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end

@@ -1,4 +1,4 @@
-ActiveAdmin.register Type do
+ActiveAdmin.register Tag do
   config.filters = false
 
   # See permitted parameters documentation:
