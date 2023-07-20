@@ -12,7 +12,7 @@ ActiveAdmin.register Page do
     f.semantic_errors
     f.inputs do
       f.input :title
-      f.input :content, as: :quill_editor
+      f.input :content, as: :rich_text_area
       f.input :permalink
     end
     f.actions
