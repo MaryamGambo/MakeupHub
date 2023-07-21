@@ -13,7 +13,6 @@ class CreateCustomers < ActiveRecord::Migration[7.0]
       t.string :alt_postal_code
       t.string :password
 
-      t.timestamps
-    end
+      t.timestamps    end
   end
 end
