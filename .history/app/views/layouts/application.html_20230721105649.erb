@@ -17,9 +17,9 @@
       <%= render 'shared/menu' %>
 
     <section class="section">
-      <% if notice.present? %>
-        <p class="notice notification is-success"><%= notice %></p>
-      <% end %>
+    <div class="notification is-success">
+      <p class="notice"><%= notice %></p>
+    </div>
       <%= yield %>
     </section>
     <%= render 'shared/footer' %>
