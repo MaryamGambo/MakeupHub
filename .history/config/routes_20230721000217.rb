@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :customer, only: [:show]
+  resources :customers, only: [:show]
   devise_for :customers
   get 'home/index'
 

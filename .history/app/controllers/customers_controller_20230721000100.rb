@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
-  before_action :authenticate_customer! # This ensures that the user is logged in before accessing the actions
-  before_action :find_customer, only: [:show, :edit, :update]
+  before_action :authenticate_customer!
+  before_action :find_customer, only: [:show]
 
   def show
     # The customer details are already loaded in the before_action.
@@ -25,7 +25,7 @@ class CustomersController < ApplicationController
   end
 
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :primary_address, :alt_address,
+    params.require(:customer).permit(:first_name, :last_name,:email, :primary_address, :alt_address,
                                      :primary_city, :alt_city, :primary_postal_code, :alt_postal_code,
                                      :primary_province_id, :alt_province_id)
   end

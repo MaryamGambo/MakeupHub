@@ -21,7 +21,7 @@ class Customer < ApplicationRecord
 
   validates :first_name, :last_name, length: { maximum: 100 }
   validates :primary_address, :primary_city, :alt_address, :alt_city, allow_nil: true, length: { maximum: 100 }
-  validate :canadian_postal_code_format
+  validates :canadian_postal_code_format, if: -> { primary_postal_code.present? || alt_postal_code.present? }
 
 
 end

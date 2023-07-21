@@ -1,0 +1,15 @@
+
+
+<h1>Customer Details</h1>
+<p><strong>First Name:</strong> <%= @customer.first_name %></p>
+<p><strong>Last Name:</strong> <%= @customer.last_name %></p>
+<p><strong>Email:</strong> <%= @customer.email%>
+<p><strong>Primary Address:</strong> <%= @customer.primary_address %></p>
+<p><strong>Alt Address:</strong> <%= @customer.alt_address %></p>
+<p><strong>Primary City:</strong> <%= @customer.primary_city %></p>
+<p><strong>Alt City:</strong> <%= @customer.alt_city %></p>
+<p><strong>Primary Postal Code:</strong> <%= @customer.primary_postal_code %></p>
+<p><strong>Alt Postal Code:</strong> <%= @customer.alt_postal_code %></p>
+<p><strong>Primary Province:</strong> <%= @customer.primary_province.name if @customer.primary_province %></p>
+<p><strong>Alt Province:</strong> <%= @customer.alt_province.name if @customer.alt_province %></p>
+<%= link_to 'Edit Account Details', edit_customers_path(@customer), class: 'button is-primary' %>

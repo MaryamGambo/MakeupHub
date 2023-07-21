@@ -11,4 +11,4 @@
 <p><strong>Alt Postal Code:</strong> <%= @customer.alt_postal_code %></p>
 <p><strong>Primary Province:</strong> <%= @customer.primary_province.name if @customer.primary_province %></p>
 <p><strong>Alt Province:</strong> <%= @customer.alt_province.name if @customer.alt_province %></p>
-<%= link_to 'Edit Account Details', edit_customer_path(@customer), class: 'button is-primary' %>
+<%= link_to 'Edit Account Details', edit_customers_path(@customer), class: 'button is-primary' %>

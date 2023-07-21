@@ -13,30 +13,14 @@
       <a class="navbar-item has-text-white" href="<%= products_path %>">Products</a>
       <%= link_to 'About Us', permalink_path('about_us'), class: 'navbar-item has-text-white' %>
       <%= link_to 'Contact Us', permalink_path('contact_us'), class: 'navbar-item has-text-white' %>
-
-      <% if customer_signed_in? %>
-        <!-- If customer is signed in, display account dropdown -->
-        <div class="navbar-item has-dropdown is-hoverable ">
-          <a class="navbar-link has-text-white">
-            Account
-          </a>
-          <div class="navbar-dropdown">
-            <%= link_to 'View Profile', customer_path(current_customer), class: 'navbar-item' %>
-            <%= button_to "Sign out", destroy_customer_session_path, method: :delete, class: 'navbar-item' %>
-          </div>
-        </div>
-      <% else %>
-        <!-- If customer is not signed in, display sign in button -->
-        <%= button_to "Sign in", new_customer_session_path, class: 'navbar-item mt-2' %>
-      <% end %>
     </div>
 
     <div class="navbar-item has-text-centered">
       <%= form_tag(search_products_path, method: :get, class: 'field has-addons') do %>
-        <div class="control">
-          <div class="select is-dark">
-            <%= select_tag(:type_id, options_for_select(Type.all.map { |p| [p.name, p.id] }), include_blank: 'All') %>
-          </div>
+      <div class="control">
+        <div class="select">
+          <%= select_tag(:type_id, options_for_select(Type.all.map { |p| [p.name, p.id] }), include_blank: 'All', class: 'select is-dark') %>
+        </div>
         </div>
         <div class="control">
           <%= text_field_tag(:keyword, params[:keyword], id: 'keyword-input', placeholder: 'Search by Keyword', class: 'input') %>
@@ -47,7 +31,24 @@
       <% end %>
     </div>
 
-    <div class="navbar-end mt-2">
+
+     <% if customer_signed_in? %>
+      <!-- If customer is signed in, display account dropdown -->
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link has-text-white">
+          Account
+        </a>
+        <div class="navbar-dropdown">
+          <%= link_to 'View Profile', customer_path(current_customer), class: 'navbar-item' %>
+          <%= button_to "Sign out", destroy_customer_session_path, method: :delete, class: 'navbar-item' %>
+        </div>
+      </div>
+    <% else %>
+      <!-- If customer is not signed in, display sign in button -->
+      <%= button_to "Sign in", new_customer_session_path, class: 'navbar-item' %>
+    <% end %>
+
+    <div class="navbar-end">
       <%= link_to cart_path, class: 'button is-info' do %>
         <span class="icon">
           <i class="fas fa-shopping-cart"></i>

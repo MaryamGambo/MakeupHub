@@ -16,7 +16,7 @@
 
       <% if customer_signed_in? %>
         <!-- If customer is signed in, display account dropdown -->
-        <div class="navbar-item has-dropdown is-hoverable ">
+        <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link has-text-white">
             Account
           </a>
@@ -27,7 +27,7 @@
         </div>
       <% else %>
         <!-- If customer is not signed in, display sign in button -->
-        <%= button_to "Sign in", new_customer_session_path, class: 'navbar-item mt-2' %>
+        <%= button_to "Sign in", new_customer_session_path, class: 'navbar-item' %>
       <% end %>
     </div>
 
@@ -47,7 +47,7 @@
       <% end %>
     </div>
 
-    <div class="navbar-end mt-2">
+    <div class="navbar-end">
       <%= link_to cart_path, class: 'button is-info' do %>
         <span class="icon">
           <i class="fas fa-shopping-cart"></i>
