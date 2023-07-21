@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
   scope '/checkout' do
-    post 'create', to: 'checkout#create', as: 'checkout_create'
-    get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
-    get 'success', to: 'checkout#success', as: 'checkout_success'
-
+    post 'create', to: 'checkout#create', as:
   end
   resources :customer, only: [:show]
   devise_for :customers
