@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_21_035343) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_21_172513) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -113,7 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_21_035343) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.date "order_date"
+    t.date "order_date", default: -> { "CURRENT_DATE" }
     t.decimal "GST"
     t.decimal "HST"
     t.decimal "PST"
