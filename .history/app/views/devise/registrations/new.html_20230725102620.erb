@@ -9,27 +9,6 @@
   </div>
 
   <div class="field">
-    <%= f.label :primary_address %><br />
-    <%= f.text_field :primary_address %>
-  </div>
-
-  <div class="field">
-    <%= f.label :primary_city %><br />
-    <%= f.text_field :primary_city %>
-  </div>
-
-  <div class="field">
-      <%= f.label :primary_postal_code %><br />
-      <%= f.text_field :primary_postal_code %>
-  </div>
-
-
-  <div class="field">
-    <%= f.label :primary_province %><br />
-    <%= f.collection_select :primary_province_id, Province.all, :id, :name, include_blank: true %>
-  </div>
-
-  <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
