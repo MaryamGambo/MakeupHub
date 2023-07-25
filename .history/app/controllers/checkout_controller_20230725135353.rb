@@ -59,13 +59,16 @@ class CheckoutController < ApplicationController
       # Customer is logged in and has a primary or alternate address saved
       # Use the province from the address to calculate taxes
       province_id = current_customer.primary_province || current_customer.alt_province
-    elsif session[:guest_address].present?
+    elsif session[:guest_address]
       # Customer is not logged in, but has an address saved in the session (guest checkout)
       # Use the address province from the session to calculate taxes
-      province_id = (session[:guest_address]['province'])
+      province_id = (session[:guest_address][:province]).to_i
+      puts "Using province from session: #{session[:guest_address][:province]}"
+      puts "Province value class: #{session[:guest_address][:province].class}"
     end
 
     province = Province.find_by(id: province_id)
+    puts "Using province from session: #{province_id.inspect}" # Add this line for debugging
 
     return 0 unless province
 

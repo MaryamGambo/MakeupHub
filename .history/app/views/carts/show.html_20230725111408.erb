@@ -64,8 +64,8 @@
   <% if current_customer.primary_address || current_customer.alt_address %>
     <%= button_to 'Proceed to Checkout', checkout_index_path, class: 'button', method: :get %>
   <% else %>
-    <%= button_to 'Add Address for Checkout', edit_customer_registration_path, class: 'button' %>
+    <%= link_to 'Add Address for Checkout', edit_customer_registration_path, class: 'button' %>
   <% end %>
 <% else %>
-  <%= button_to 'Proceed to Checkout', checkout_guest_path, class: 'button', method: :get %>
+  <%= link_to 'Proceed to Checkout', checkout_guest_path, class: 'button', method: :get %>
 <% end %>

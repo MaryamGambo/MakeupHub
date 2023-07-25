@@ -67,5 +67,5 @@
     <%= button_to 'Add Address for Checkout', edit_customer_registration_path, class: 'button' %>
   <% end %>
 <% else %>
-  <%= button_to 'Proceed to Checkout', checkout_guest_path, class: 'button', method: :get %>
+  <%= button_to 'Proceed to Checkout', checkout_guest_path, class: 'button', method: :post %>
 <% end %>

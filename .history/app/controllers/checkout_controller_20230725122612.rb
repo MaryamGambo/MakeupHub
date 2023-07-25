@@ -11,8 +11,7 @@ class CheckoutController < ApplicationController
 
   def guest
   # Fetch the list of provinces for the dropdown select menu
-  @address ||= session[:guest_address] || {}
-  @provinces_list = Province.all.map { |province| [province.name, province.id] }
+  @provinces_list = provinces_list
 
   end
 
@@ -20,24 +19,20 @@ class CheckoutController < ApplicationController
     # Check if the form is submitted and handle the form submission
     if request.post?
       address_params = params[:address]
-
       # Validate the form fields
       if address_params[:address_line1].blank? || address_params[:city].blank? || address_params[:province].blank? || address_params[:postal_code].blank?
-        flash[:error] = 'Please fill in all the required fields.'
+        flash.now[:error] = 'Please fill in all the required fields.'
       else
         # Process the valid form submission and save the address to the session
         session[:guest_address] = address_params
-
         redirect_to checkout_index_path
         return
       end
     end
 
-      # If the form submission is invalid or it's the first visit to the page, render the form
-      @address ||= session[:guest_address] || {}
-      @provinces_list = Province.all.map { |province| [province.name, province.id] }
+    # If the form submission is invalid or it's the first visit to the page, render the form
+    @address = session[:guest_address] || {} # Use session data if available
 
-      redirect_to checkout_guest_path, flash: { error: 'Please fill in all the required fields.' }
   end
 
 
@@ -53,26 +48,23 @@ class CheckoutController < ApplicationController
   end
 
   def calculate_taxes(subtotal)
-    province_id = nil
+    province = nil
 
-    if customer_signed_in? && (current_customer.primary_address || current_customer.alt_address)
+    if current_customer.primary_address || current_customer.alt_address
       # Customer is logged in and has a primary or alternate address saved
       # Use the province from the address to calculate taxes
-      province_id = current_customer.primary_province || current_customer.alt_province
-    elsif session[:guest_address].present?
+      province = current_customer.primary_address&.province || current_customer.alt_address&.province
+    elsif session[:guest_address]
       # Customer is not logged in, but has an address saved in the session (guest checkout)
       # Use the address province from the session to calculate taxes
-      province_id = (session[:guest_address]['province'])
+      province = session[:guest_address][:province]
     end
-
-    province = Province.find_by(id: province_id)
 
     return 0 unless province
 
     gst_rate = province.GST.to_f
     pst_rate = province.PST.to_f
     hst_rate = province.HST.to_f
-
 
     gst_amount = subtotal * gst_rate
     pst_amount = subtotal * pst_rate

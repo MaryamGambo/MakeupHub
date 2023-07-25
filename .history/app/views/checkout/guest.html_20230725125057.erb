@@ -20,7 +20,7 @@
 
   <div>
     <label>Province:</label>
-    <%= select_tag 'address[province]', options_for_select(@provinces_list, @address[:province].to_i) %>
+    <%= select_tag 'address[province]', options_for_select(@provinces_list, @address[:province]) %>
   </div>
 
   <div>

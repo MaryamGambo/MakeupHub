@@ -1,0 +1,36 @@
+<h1>Guest Checkout - Enter Your Address</h1>
+
+<% if flash[:error] %>
+  <div class="notification is-error flash-message">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<%= form_tag save_address_path, method: :post do %>
+  <!-- Add form fields for address input -->
+  <div>
+    <label>Address:</label>
+    <%= text_field_tag 'address[address_line1]' %>
+  </div>
+
+  <div>
+    <label>City:</label>
+    <%= text_field_tag 'address[city]' %>
+  </div>
+
+  <div>
+    <label>Province:</label>
+    <%= select_tag 'address[province]', options_for_select(Province.all.pluck(:name, :id)) %>
+  </div>
+
+  <div>
+    <label>Postal Code:</label>
+    <%= text_field_tag 'address[postal_code]' %>
+  </div>
+
+  <%= submit_tag 'Save Address ', class: 'button' %>
+<% end %>
+
+  <!-- Display a link to sign up for new customers -->
+  <%= link_to 'Sign Up and Save Address for Future Use', new_customer_registration_path %>
+

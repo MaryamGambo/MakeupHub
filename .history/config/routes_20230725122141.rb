@@ -4,8 +4,7 @@ Rails.application.routes.draw do
     get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
     get 'success', to: 'checkout#success', as: 'checkout_success'
     get 'index', to: 'checkout#index', as: 'checkout_index'
-    get 'guest', to: 'checkout#guest', as: 'checkout_guest'
-    post 'save_guest_address', to: 'checkout#save_guest_address', as: 'save_guest_address'
+    post 'guest', to: 'checkout#guest', as: 'checkout_guest'
 
   end
   resources :customer, only: [:show]

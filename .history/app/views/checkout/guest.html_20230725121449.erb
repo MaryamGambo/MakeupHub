@@ -1,12 +1,12 @@
 <h1>Guest Checkout - Enter Your Address</h1>
 
-<% if flash[:error].present?%>
+<% if flash[:error] %>
   <div class="notification is-danger flash-message">
     <%= flash[:error] %>
   </div>
 <% end %>
 
-<%= form_tag save_guest_address_path, method: :post do %>
+<%= form_tag checkout_guest_path, method: :post do %>
   <!-- Add form fields for address input -->
   <div>
     <label>Address Line 1:</label>
@@ -20,7 +20,7 @@
 
   <div>
     <label>Province:</label>
-    <%= select_tag 'address[province]', options_for_select(@provinces_list, @address[:province].to_i) %>
+    <%= select_tag 'address[province]', options_for_select(@provinces_list, @address[:province]) %>
   </div>
 
   <div>
