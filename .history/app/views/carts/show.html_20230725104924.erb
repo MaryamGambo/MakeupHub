@@ -60,12 +60,4 @@
   </tfoot>
 </table>
 
-<% if customer_signed_in? %>
-  <% if current_customer.primary_address || current_customer.alt_address %>
-    <%= button_to 'Proceed to Checkout', checkout_index_path, class: 'button', method: :get %>
-  <% else %>
-    <%= link_to 'Add Address for Checkout', edit_customer_registration_path, class: 'button' %>
-  <% end %>
-<% else %>
-  <%= link_to 'Proceed to Checkout', checkout_as_guest_path, class: 'button', method: :get %>
-<% end %>
+<%= button_to 'Proceed to Checkout', checkout_index_path, class: 'button', method: :get %>
