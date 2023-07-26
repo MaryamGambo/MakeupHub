@@ -1,0 +1,39 @@
+<h1>Invoice</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart.each do |product_id, quantity| %>
+      <% product = Product.find(product_id) %>
+      <% product_price = product.price * quantity %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= quantity %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= number_to_currency(product_price) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">Total Price (excluding taxes):</td>
+      <td><%= number_to_currency(@subtotal) %></td>
+    </tr>
+    <tr>
+      <td colspan="3">Calculated Tax:</td>
+      <td><%= number_to_currency(@taxes) %></td>
+    </tr>
+    <tr>
+      <td colspan="3">Total Price (including taxes):</td>
+      <td><%= number_to_currency(@total_price) %></td>
+    </tr>
+  </tfoot>
+</table>
+
+<%= button_to 'Place your order', checkout_create_path, method: :post %>

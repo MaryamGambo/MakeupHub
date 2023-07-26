@@ -1,0 +1,4 @@
+const stripe = Stripe('<%= Rails.configuration.stripe[:publisahble_key] %>');
+
+stripe.redirectToCheckout({
+  sessionId: '<%= @session.id %>'
