@@ -94,14 +94,14 @@ class CheckoutController < ApplicationController
     # Create line items for Stripe checkout
     line_items = @cart.map do |product_id, quantity|
       product = Product.find(product_id)
-      product_price = (product.price * quantity * 100)
+      product_price = product.price * quantity
       {
         price_data: {
           currency: 'cad',
           product_data: {
             name: product.name,
           },
-          unit_amount: (product.price * 100).to_i, # Stripe requires the amount in cents
+          unit_amount: (product_price * 100).to_i, # Stripe requires the amount in cents
         },
         quantity: quantity,
       }
@@ -186,8 +186,7 @@ class CheckoutController < ApplicationController
      # Get the Stripe payment intent ID from the Stripe Checkout Session
      payment_intent_id = stripe_session.payment_intent
 
-     @customer_email = stripe_session.customer_details.email
-     @customer_name = stripe_session.customer_details.name
+     @email = stripe_session.customer_details.email
       # Get customer province from metadata
      metadata = stripe_session.metadata
      customer_address = JSON.parse(metadata['customer_address'])
@@ -212,58 +211,51 @@ class CheckoutController < ApplicationController
     puts " pst: #{pst_rate}"
     puts " hst: #{hst_rate}"
 
-    # Get cart info from metadata and parse it back into a Ruby hash
-  @cart_info = JSON.parse(metadata['cart_info'])
 
-  # Calculate the subtotal using data from the metadata saved cart
-  @subtotal = 0
-  @cart_info.each do |product_id, quantity|
-    product = Product.find(product_id)
-    product_price = product.price * quantity
-    @subtotal += product_price
-  end
+     # Create the order in your database and associate it with the customer
+     @cart = session[:cart] || {}
+     @subtotal = calculate_subtotal
+     @gst_amount = @subtotal * gst_rate
+     @pst_amount = @subtotal * pst_rate
+     @hst_amount = @subtotal * hst_rate
+     @total_price = @subtotal + @gst_amount + @pst_amount + @hst_amount
 
-  # Calculate the gst_amount, hst_amount, pst_amount, and total_amount using data from the metadata saved cart
-  @gst_amount = @subtotal * gst_rate
-  @pst_amount = @subtotal * pst_rate
-  @hst_amount = @subtotal * hst_rate
-  @total_amount = @subtotal + @gst_amount + @pst_amount + @hst_amount
+     puts "cart: #{@cart}"
+     puts " gst: #{@gst_amount}"
+     puts " pst: #{@pst_amount}"
+     puts " hst: #{@hst_amount}"
+     puts " subtotal: #{@subtotal}"
+     puts " total: #{@total_price}"
 
-  puts "Subtotal: #{@subtotal}"
-  puts "GST Amount: #{@gst_amount}"
-  puts "PST Amount: #{@pst_amount}"
-  puts "HST Amount: #{@hst_amount}"
-  puts "Total Amount: #{@total_amount}"
+     # Save order details to the orders table
+     @order = Order.create!(
+       order_date: Date.current,
+       GST: @gst_amount,
+       HST: @hst_amount,
+       PST: @pst_amount,
+       total_amount: @total_price,
+       status: 'paid',
+       customer_id: customer_signed_in? ? current_customer.id : nil,
+       payment_intent_id: payment_intent_id,
+     )
 
-  # Create the order in your database and associate it with the customer
-   @order = Order.create!(
-     order_date: Date.current,
-     GST: @gst_amount,
-     HST: @hst_amount,
-     PST: @pst_amount,
-     total_amount: @total_amount,
-     status: 'paid',
-     customer_id: customer_signed_in? ? current_customer.id : nil,
-     payment_intent_id: payment_intent_id
-   )
+     # Save order items to the order_items table
+     @cart.each do |product_id, quantity|
+       product = Product.find(product_id)
+       product_price = product.price * quantity
+       OrderItem.create!(
+         product_id: product.id,
+         order_id: @order.id,
+         quantity: quantity,
+         price: product_price,
+       )
+     end
 
-  # Save order items to the order_items table using the metadata cart info
-  @cart_info.each do |product_id, quantity|
-    product = Product.find(product_id)
-    product_price = product.price * quantity
-    OrderItem.create!(
-      product_id: product.id,
-      order_id: @order.id,
-      quantity: quantity,
-      price: product_price,
-    )
-  end
+     # Clear the cart after successful order creation
+     #  session[:cart] = nil
 
-  # Clear the cart after successful order creation
-  # session[:cart] = nil
-
-  # Redirect to the success page
-  # redirect_to checkout_success_path
+     # Redirect to the success page
+    #  redirect_to checkout_success_path
 
   end
 

@@ -94,7 +94,7 @@ class CheckoutController < ApplicationController
     # Create line items for Stripe checkout
     line_items = @cart.map do |product_id, quantity|
       product = Product.find(product_id)
-      product_price = (product.price * quantity * 100)
+      product_price = product.price * quantity
       {
         price_data: {
           currency: 'cad',

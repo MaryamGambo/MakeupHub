@@ -94,14 +94,14 @@ class CheckoutController < ApplicationController
     # Create line items for Stripe checkout
     line_items = @cart.map do |product_id, quantity|
       product = Product.find(product_id)
-      product_price = (product.price * quantity * 100)
+      product_price = product.price * quantity
       {
         price_data: {
           currency: 'cad',
           product_data: {
             name: product.name,
           },
-          unit_amount: (product.price * 100).to_i, # Stripe requires the amount in cents
+          unit_amount: (product_price * 100).to_i, # Stripe requires the amount in cents
         },
         quantity: quantity,
       }
@@ -187,7 +187,6 @@ class CheckoutController < ApplicationController
      payment_intent_id = stripe_session.payment_intent
 
      @customer_email = stripe_session.customer_details.email
-     @customer_name = stripe_session.customer_details.name
       # Get customer province from metadata
      metadata = stripe_session.metadata
      customer_address = JSON.parse(metadata['customer_address'])
@@ -236,16 +235,16 @@ class CheckoutController < ApplicationController
   puts "Total Amount: #{@total_amount}"
 
   # Create the order in your database and associate it with the customer
-   @order = Order.create!(
-     order_date: Date.current,
-     GST: @gst_amount,
-     HST: @hst_amount,
-     PST: @pst_amount,
-     total_amount: @total_amount,
-     status: 'paid',
-     customer_id: customer_signed_in? ? current_customer.id : nil,
-     payment_intent_id: payment_intent_id
-   )
+  @order = Order.create!(
+    order_date: Date.current,
+    GST: @gst_amount,
+    HST: @hst_amount,
+    PST: @pst_amount,
+    total_amount: @total_amount,
+    status: 'paid',
+    customer_id: customer_signed_in? ? current_customer.id : nil,
+    payment_intent_id: payment_intent_id,
+  )
 
   # Save order items to the order_items table using the metadata cart info
   @cart_info.each do |product_id, quantity|

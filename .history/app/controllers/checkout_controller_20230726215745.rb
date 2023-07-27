@@ -94,14 +94,14 @@ class CheckoutController < ApplicationController
     # Create line items for Stripe checkout
     line_items = @cart.map do |product_id, quantity|
       product = Product.find(product_id)
-      product_price = (product.price * quantity * 100)
+      product_price = product.price * quantity
       {
         price_data: {
           currency: 'cad',
           product_data: {
             name: product.name,
           },
-          unit_amount: (product.price * 100).to_i, # Stripe requires the amount in cents
+          unit_amount: (product_price * 100).to_i, # Stripe requires the amount in cents
         },
         quantity: quantity,
       }
@@ -187,7 +187,7 @@ class CheckoutController < ApplicationController
      payment_intent_id = stripe_session.payment_intent
 
      @customer_email = stripe_session.customer_details.email
-     @customer_name = stripe_session.customer_details.name
+     @name = stripe_session.customer_details.name
       # Get customer province from metadata
      metadata = stripe_session.metadata
      customer_address = JSON.parse(metadata['customer_address'])
