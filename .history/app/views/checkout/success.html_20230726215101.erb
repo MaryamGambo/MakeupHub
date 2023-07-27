@@ -10,8 +10,6 @@
   <p>
   <% if customer_signed_in? %>
       Name: <%= current_customer.first_name %> <%= current_customer.last_name %><br>
-  <% else %>
-     Name: <%= @customer_name %>
   <% end %>
      Email: <%= @customer_email %>
   </p>
@@ -40,17 +38,11 @@
       </tr>
       <tr>
         <td colspan="3">Taxes</td>
-         <td>
-              <% if @hst_amount > 0 %>
-                 <%= @hst_amount %> (HST)<br>
-              <% end %>
-              <% if @gst_amount > 0 %>
-                 <%= @gst_amount %> (GST)<br>
-              <% end %>
-              <% if @pst_amount > 0 %>
-                  <%= @pst_amount %> (PST)<br>
-              <% end %>
-         </td>
+        <td>
+          <%= @hst_amount %> (HST)<br>
+          <%= @gst_amount %> (GST)<br>
+          <%= @pst_amount %> (PST)
+        </td>
       </tr>
       <tr>
         <td colspan="3">Total Amount</td>

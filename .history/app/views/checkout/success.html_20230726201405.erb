@@ -1,0 +1,27 @@
+<div>
+
+<h1>Payment Successful</h1>
+
+<h2>Order Details:</h2>
+<ul>
+  <% @cart_items.each do |item| %>
+    <li><%= item[:quantity] %> x <%= item[:product_name] %> - <%= number_to_currency(item[:price]) %></li>
+  <% end %>
+</ul>
+
+<h2>Taxes:</h2>
+<p>HST: <%= number_to_currency(@taxes * @hst_rate) %></p>
+<p>GST: <%= number_to_currency(@taxes * @gst_rate) %></p>
+<p>PST: <%= number_to_currency(@taxes * @pst_rate) %></p>
+
+<h2>Total Amount (Including Taxes):</h2>
+<p><%= number_to_currency(@total_amount) %></p>
+
+<h2>Delivered To:</h2>
+<p><%= @address %></p>
+<p><%= @province.name %></p>
+
+<h2>Email:</h2>
+<p><%= email %></p>
+
+</div>

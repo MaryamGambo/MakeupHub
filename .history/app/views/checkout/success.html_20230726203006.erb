@@ -1,0 +1,48 @@
+<div>
+  <h1>Payment Successful</h1>
+  <p>Delivered to the customer's address:</p>
+  <p>
+    <%= @customer_address[:address] %><br>
+    <%= @customer_address[:city] %>, <%= @customer_address[:postal_code] %><br>
+    <%= @customer_address[:province] %>
+  </p>
+  <p>Customer Details:</p>
+  <p>
+  <% if customer.signed%>
+    Name: <%= @customer_name %><br>
+    Email: <%= @customer_email %>
+  </p>
+  <h2>Order Details:</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart.each do |product_id, quantity| %>
+        <% product = Product.find(product_id) %>
+        <% product_price = product.price * quantity %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= quantity %></td>
+          <td><%= product_price%></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td colspan="3">Taxes (HST, GST, PST)</td>
+        <td>
+          <%= @hst_amount %> (HST)<br>
+          <%= @gst_amount %> (GST)<br>
+          <%= @pst_amount %> (PST)
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">Total Amount</td>
+        <td><%= @total_price %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
