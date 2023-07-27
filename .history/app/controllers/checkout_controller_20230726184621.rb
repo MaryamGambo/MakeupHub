@@ -122,37 +122,6 @@ class CheckoutController < ApplicationController
     # Add the taxes line item to the existing line items
     line_items << taxes_item
 
-    # Set customer details and address for metadata
-    customer_address = {}
-    if customer_signed_in?
-      # Customer is logged in, use the primary address if available, otherwise use alternate address
-      customer = current_customer
-      if customer.primary_address.present?
-        customer_address = {
-          address: customer.primary_address,
-          city: customer.primary_city,
-          postal_code: customer.primary_postal_code,
-          province: customer.primary_province.name # Assuming province has a 'name' attribute
-        }
-      else
-        customer_address = {
-          address: customer.alt_address,
-          city: customer.alt_city,
-          postal_code: customer.alt_postal_code,
-          province: customer.alt_province.name # Assuming province has a 'name' attribute
-        }
-      end
-    elsif session[:guest_address].present?
-      # Customer is not logged in, but has an address saved in the session (guest checkout)
-      guest_address = session[:guest_address]
-      customer_address = {
-        address: guest_address['address_line1'],
-        city: guest_address['city'],
-        postal_code: guest_address['postal_code'],
-        province: Province.find_by(id: guest_address['province'])&.name # Assuming province has a 'name' attribute
-      }
-    end
-
     # Create a Stripe Checkout Session with the Stripe gem
     session = Stripe::Checkout::Session.create({
       payment_method_types: ['card'],
@@ -160,10 +129,6 @@ class CheckoutController < ApplicationController
       mode: 'payment',
       success_url: "https://7a07-24-78-13-91.ngrok-free.app/checkout/success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: "https://7a07-24-78-13-91.ngrok-free.app/checkout/cancel",
-      metadata: {
-        customer_address: customer_address.to_json,
-        cart_info: @cart.to_json
-      }
      })
 
 

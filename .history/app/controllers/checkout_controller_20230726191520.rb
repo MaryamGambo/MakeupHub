@@ -160,10 +160,6 @@ class CheckoutController < ApplicationController
       mode: 'payment',
       success_url: "https://7a07-24-78-13-91.ngrok-free.app/checkout/success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: "https://7a07-24-78-13-91.ngrok-free.app/checkout/cancel",
-      metadata: {
-        customer_address: customer_address.to_json,
-        cart_info: @cart.to_json
-      }
      })
 
 
