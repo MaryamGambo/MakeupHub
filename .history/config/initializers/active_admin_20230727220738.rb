@@ -1,12 +1,15 @@
 ActiveAdmin.setup do |config|
-  require 'inherited_resources'
-
   # == Site Title
   #
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
   config.site_title = "Makeup Hub"
+
+  config.namespace 'admin' do |admin|
+    # other configurations...
+    admin.register_page 'Orders Summary'
+  end
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
