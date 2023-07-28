@@ -1,0 +1,13 @@
+<h1>My Orders</h1>
+
+<% if @orders.empty? %>
+  <p>No orders found.</p>
+<% else %>
+  <ul>
+    <% @orders.each do |order| %>
+      <li>
+        <%= link_to "Order ##{order.id} - #{order.order_date.strftime('%B %e, %Y')}", order_path(order) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

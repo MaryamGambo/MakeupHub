@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'orders/index'
+  get 'orders/show'
+
   scope '/checkout' do
     post 'create', to: 'checkout#create', as: 'checkout_create'
     get 'cancel', to: 'checkout#cancel', as: 'checkout_cancel'
@@ -19,11 +22,6 @@ Rails.application.routes.draw do
   # get 'carts/remove'
   # get 'products/index'
   # get 'products/show'
-  # get 'orders/index'
-  # get 'orders/show'
-
-  resources :orders, only: [:index, :show]
-
 
   resources :types do
     resources :products, only: :index
