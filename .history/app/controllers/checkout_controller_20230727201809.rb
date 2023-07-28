@@ -161,6 +161,7 @@ class CheckoutController < ApplicationController
     line_items << taxes_item
 
     # Set customer details and address for metadata
+    customer_province = {}
     if customer_signed_in?
       # Customer is logged in, use the primary address if available, otherwise use alternate address
       customer = current_customer

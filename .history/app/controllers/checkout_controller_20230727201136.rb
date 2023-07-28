@@ -8,7 +8,7 @@ class CheckoutController < ApplicationController
      @taxes = calculate_taxes(@subtotal)
      @total_price = @subtotal + @taxes
 
-     # Fetch and set the customer address
+      # Fetch and set the customer address
     set_customer_address
 
   end
@@ -160,35 +160,6 @@ class CheckoutController < ApplicationController
     # Add the taxes line item to the existing line items
     line_items << taxes_item
 
-    # Set customer details and address for metadata
-    if customer_signed_in?
-      # Customer is logged in, use the primary address if available, otherwise use alternate address
-      customer = current_customer
-      if customer.primary_address.present?
-        customer_address = {
-          address: customer.primary_address,
-          city: customer.primary_city,
-          postal_code: customer.primary_postal_code,
-          province: customer.primary_province.id
-        }
-      else
-        customer_address = {
-          address: customer.alt_address,
-          city: customer.alt_city,
-          postal_code: customer.alt_postal_code,
-          province: customer.alt_province.id
-        }
-      end
-    elsif session[:guest_address].present?
-      # Customer is not logged in, but has an address saved in the session (guest checkout)
-      guest_address = session[:guest_address]
-      customer_address = {
-        address: guest_address['address_line1'],
-        city: guest_address['city'],
-        postal_code: guest_address['postal_code'],
-        province:guest_address['province']
-      }
-    end
 
     # Create a Stripe Checkout Session with the Stripe gem
     session = Stripe::Checkout::Session.create({
@@ -198,7 +169,6 @@ class CheckoutController < ApplicationController
       success_url: "https://6c41-24-78-13-91.ngrok-free.app/checkout/success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: "https://6c41-24-78-13-91.ngrok-free.app/checkout/cancel",
       metadata: {
-        customer_address: customer_address.to_json,
         cart_info: @cart.to_json
       }
      })
@@ -225,18 +195,10 @@ class CheckoutController < ApplicationController
 
      @customer_email = stripe_session.customer_details.email
      @customer_name = stripe_session.customer_details.name
-      # Get customer province from metadata
-     metadata = stripe_session.metadata
-     customer_address = JSON.parse(metadata['customer_address'])
-     @customer_address = {
-      address: customer_address['address'],
-      city: customer_address['city'],
-      postal_code: customer_address['postal_code'],
-      province: customer_address['province']
-    }
 
-    puts "Customer Address: #{@customer_address}"
 
+    # Fetch and set the customer address
+    set_customer_address
 
 
     # Fetch the HST, GST, and PST values from the provinces table using the address province

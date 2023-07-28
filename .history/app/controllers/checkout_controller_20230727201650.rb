@@ -8,9 +8,6 @@ class CheckoutController < ApplicationController
      @taxes = calculate_taxes(@subtotal)
      @total_price = @subtotal + @taxes
 
-     # Fetch and set the customer address
-    set_customer_address
-
   end
 
   def guest
@@ -161,6 +158,7 @@ class CheckoutController < ApplicationController
     line_items << taxes_item
 
     # Set customer details and address for metadata
+    customer_province = {}
     if customer_signed_in?
       # Customer is logged in, use the primary address if available, otherwise use alternate address
       customer = current_customer
@@ -195,8 +193,8 @@ class CheckoutController < ApplicationController
       payment_method_types: ['card'],
       line_items: line_items,
       mode: 'payment',
-      success_url: "https://6c41-24-78-13-91.ngrok-free.app/checkout/success?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "https://6c41-24-78-13-91.ngrok-free.app/checkout/cancel",
+      success_url: "https://fb14-198-163-150-11.ngrok-free.app/checkout/success?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: "https://fb14-198-163-150-11.ngrok-free.app/checkout/cancel",
       metadata: {
         customer_address: customer_address.to_json,
         cart_info: @cart.to_json

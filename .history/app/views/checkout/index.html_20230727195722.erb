@@ -1,10 +1,10 @@
 
 <h1>Invoice</h1>
 
-<% if @customer_address.present? %>
+
   <p>Delivery to:</p>
-  <p><%= @customer_address[:address] %></p>
-  <p><%= "#{@customer_address[:city]}, #{@customer_address[:province].name}" %></p>
+  <p><%= @customer_address['address'] %></p>
+  <p><%= @customer_address[:city] %>, <%= @customer_address[:province].name %></p>
   <p><%= @customer_address[:postal_code] %></p>
 
   <% if customer_signed_in? %>
@@ -12,10 +12,6 @@
   <% else %>
     <%= link_to 'Edit Address', checkout_guest_path, class: 'button' %>
   <% end %>
-<% else %>
-  <p>No delivery address available.</p>
-  <!-- Display a button or link to add a delivery address if needed -->
-<% end %>
 
 <table>
   <thead>
