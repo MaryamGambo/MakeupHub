@@ -4,13 +4,14 @@
   <div class="box">
 
    <h2 class="subtitle">Customer Details:</h2>
+ <p>
    <% if customer_signed_in? %>
-      <p> Name: <%= current_customer.first_name %> <%= current_customer.last_name %> </p>
+     Name: <%= current_customer.first_name %> <%= current_customer.last_name %><br>
    <% else %>
-    <p>  Name: <%= @customer_name %> </p>
+     Name: <%= @customer_name %>
    <% end %>
-    <p>Email: <%= @customer_email %> </p><br>
-
+   Email: <%= @customer_email %>
+ </p>
     <h2 class="subtitle">Delivered to the customer's address:</h2>
     <p>
       <%= @customer_address[:address] %><br>
@@ -61,5 +62,9 @@
         </tr>
       </tbody>
     </table>
+
+    <div data-turbo='false'>
+      <%= button_to 'Place your order', checkout_create_path, method: :post %>
+    </div>
   </div>
 </div>

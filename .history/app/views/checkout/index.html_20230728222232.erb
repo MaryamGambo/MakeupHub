@@ -1,0 +1,58 @@
+
+<h1>Invoice</h1>
+
+<% if @customer_address.present? %>
+  <p>Delivery to:</p>
+  <p><%= @customer_address[:address] %></p>
+  <p><%= "#{@customer_address[:city]}, #{@customer_address[:province].name}" %></p>
+  <p><%= @customer_address[:postal_code] %></p>
+
+  <% if customer_signed_in? %>
+    <%= link_to 'Edit Address', edit_customer_registration_path, class: 'button' %>
+  <% else %>
+    <%= link_to 'Edit Address', checkout_guest_path, class: 'button' %>
+  <% end %>
+<% else %>
+  <p>No delivery address available.</p>
+  <!-- Display a button or link to add a delivery address if needed -->
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart.each do |product_id, quantity| %>
+      <% product = Product.find(product_id) %>
+      <% product_price = product.price * quantity %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= quantity %></td>
+        <td><%= number_to_currency(product.price) %></td>
+        <td><%= number_to_currency(product_price) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">Total Price (excluding taxes):</td>
+      <td><%= number_to_currency(@subtotal) %></td>
+    </tr>
+    <tr>
+      <td colspan="3">Calculated Tax:</td>
+      <td><%= number_to_currency(@taxes) %></td>
+    </tr>
+    <tr>
+      <td colspan="3">Total Price (including taxes):</td>
+      <td><%= number_to_currency(@total_price) %></td>
+    </tr>
+  </tfoot>
+</table>
+<div data-turbo='false'>
+<%= button_to 'Place your order', checkout_create_path, method: :post %>
+</div>

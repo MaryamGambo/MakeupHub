@@ -10,7 +10,7 @@
   <%= form_tag save_guest_address_path, method: :post, class: 'box' do %>
     <!-- Add form fields for address input -->
     <div class="field">
-      <label class="label">Address Line :</label>
+      <label class="label">Address Line 1:</label>
       <div class="control">
         <%= text_field_tag 'address[address_line1]', @address[:address_line1], class: 'input' %>
       </div>

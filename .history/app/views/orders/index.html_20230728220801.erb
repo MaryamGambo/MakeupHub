@@ -7,7 +7,7 @@
     <ul class="menu-list">
       <% @orders.each do |order| %>
         <li>
-          <%= link_to "Order - #{order.order_date.strftime('%B %e, %Y')}", order_path(order), class: 'has-text-link' %>
+          <%= link_to "Order - #{order.order_date.strftime('%B %e, %Y')}", order_path(order), class: 'has-text-primary' %>
         </li>
       <% end %>
     </ul>

@@ -1,0 +1,41 @@
+<div class="container">
+  <h2 class="title">Order Date: <%= @order.order_date.strftime('%B %e, %Y') %></h2>
+
+  <table class="table is-bordered is-striped is-narrow is-hoverable">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_items.each do |item| %>
+        <tr>
+          <td><%= item.product.name %></td>
+          <td><%= item.quantity %></td>
+          <td><%= number_to_currency(item.price) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">Order Subtotal:</td>
+        <td><%= number_to_currency(@subtotal) %></td>
+      </tr>
+
+      <tr>
+        <td colspan="3">Taxes:</td>
+        <td>
+          <%= number_to_currency(@order.GST) %> (GST)<br>
+          <%= number_to_currency(@order.PST) %> (PST)<br>
+          <%= number_to_currency(@order.HST) %> (HST)
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">Total Price (including taxes):</td>
+        <td><%= number_to_currency(@order.total_amount) %></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

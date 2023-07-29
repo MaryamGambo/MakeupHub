@@ -2,22 +2,27 @@
   <h1 class="title">Payment Successful</h1>
 
   <div class="box">
-
-   <h2 class="subtitle">Customer Details:</h2>
-   <% if customer_signed_in? %>
-      <p> Name: <%= current_customer.first_name %> <%= current_customer.last_name %> </p>
-   <% else %>
-    <p>  Name: <%= @customer_name %> </p>
-   <% end %>
-    <p>Email: <%= @customer_email %> </p><br>
-
     <h2 class="subtitle">Delivered to the customer's address:</h2>
     <p>
       <%= @customer_address[:address] %><br>
       <%= @customer_address[:city] %>, <%= @customer_address[:postal_code] %><br>
       <%= Province.find_by(id: @customer_address[:province]).name %>
     </p>
+  </div>
 
+  <div class="box">
+    <h2 class="subtitle">Customer Details:</h2>
+    <p>
+      <% if customer_signed_in? %>
+        Name: <%= current_customer.first_name %> <%= current_customer.last_name %><br>
+      <% else %>
+        Name: <%= @customer_name %>
+      <% end %>
+      Email: <%= @customer_email %>
+    </p>
+  </div>
+
+  <div class="box">
     <h2 class="subtitle">Order Details:</h2>
     <table class="table is-bordered is-striped is-narrow is-hoverable">
       <thead>
@@ -34,30 +39,30 @@
           <tr>
             <td><%= product.name %></td>
             <td><%= quantity %></td>
-            <td><%= number_to_currency(product_price.round(2)) %></td>
+            <td><%= product_price %></td>
           </tr>
         <% end %>
         <tr>
           <td colspan="3">Sub Total</td>
-          <td><%= number_to_currency(@subtotal.round(2)) %></td>
+          <td><%= @subtotal %></td>
         </tr>
         <tr>
           <td colspan="3">Taxes</td>
           <td>
             <% if @hst_amount > 0 %>
-              <%= number_to_currency(@hst_amount.round(2)) %> (HST)<br>
+              <%= @hst_amount %> (HST)<br>
             <% end %>
             <% if @gst_amount > 0 %>
-              <%= number_to_currency(@gst_amount.round(2)) %> (GST)<br>
+              <%= @gst_amount %> (GST)<br>
             <% end %>
             <% if @pst_amount > 0 %>
-              <%= number_to_currency(@pst_amount.round(2)) %> (PST)<br>
+              <%= @pst_amount %> (PST)<br>
             <% end %>
           </td>
         </tr>
         <tr>
           <td colspan="3">Total Amount</td>
-          <td><%= number_to_currency(@total_amount.round(2)) %></td>
+          <td><%= @total_amount %></td>
         </tr>
       </tbody>
     </table>

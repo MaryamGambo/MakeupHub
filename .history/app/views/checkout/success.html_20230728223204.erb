@@ -2,20 +2,21 @@
   <h1 class="title">Payment Successful</h1>
 
   <div class="box">
-
-   <h2 class="subtitle">Customer Details:</h2>
-   <% if customer_signed_in? %>
-      <p> Name: <%= current_customer.first_name %> <%= current_customer.last_name %> </p>
-   <% else %>
-    <p>  Name: <%= @customer_name %> </p>
-   <% end %>
-    <p>Email: <%= @customer_email %> </p><br>
-
     <h2 class="subtitle">Delivered to the customer's address:</h2>
     <p>
       <%= @customer_address[:address] %><br>
       <%= @customer_address[:city] %>, <%= @customer_address[:postal_code] %><br>
       <%= Province.find_by(id: @customer_address[:province]).name %>
+    </p>
+
+    <h2 class="subtitle">Customer Details:</h2>
+    <p>
+      <% if customer_signed_in? %>
+        Name: <%= current_customer.first_name %> <%= current_customer.last_name %><br>
+      <% else %>
+        Name: <%= @customer_name %>
+      <% end %>
+      Email: <%= @customer_email %>
     </p>
 
     <h2 class="subtitle">Order Details:</h2>
@@ -61,5 +62,9 @@
         </tr>
       </tbody>
     </table>
+
+    <div data-turbo='false'>
+      <%= button_to 'Place your order', checkout_create_path, method: :post %>
+    </div>
   </div>
 </div>
