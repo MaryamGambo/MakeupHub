@@ -1,0 +1,17 @@
+# .dockerignore
+
+# Ignore version control files
+.git
+.gitignore
+.gitkeep
+
+# Ignore temporary and cache files
+/tmp
+/log
+/public/assets
+.vscode
+.idea
+
+# Ignore system and hidden files
+.DS_Store
+Thumbs.db
