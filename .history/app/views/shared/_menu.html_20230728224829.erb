@@ -14,23 +14,6 @@
       <%= link_to 'About Us', permalink_path('about_us'), class: 'navbar-item has-text-white' %>
       <%= link_to 'Contact Us', permalink_path('contact_us'), class: 'navbar-item has-text-white' %>
 
-      <% if customer_signed_in? %>
-        <!-- If customer is signed in, display account dropdown -->
-        <div class="navbar-item has-dropdown is-hoverable ">
-          <a class="navbar-link has-text-white">
-            Account
-          </a>
-          <div class="navbar-dropdown">
-            <%= link_to 'View Profile', customer_path(current_customer), class: 'navbar-item' %>
-            <%= link_to 'View Orders', orders_path, class: 'navbar-item' %>
-            <%= button_to "Sign out", destroy_customer_session_path, method: :delete, class: 'navbar-item' %>
-          </div>
-        </div>
-      <% else %>
-        <!-- If customer is not signed in, display sign in button -->
-        <%= button_to "Sign in", new_customer_session_path, class: 'navbar-item mt-2  button is-primary' %>
-      <% end %>
-    </div>
 
     <div class="navbar-item has-text-centered">
       <%= form_tag(search_products_path, method: :get, class: 'field has-addons') do %>
@@ -49,6 +32,24 @@
     </div>
 
     <div class="navbar-end mt-2">
+      <% if customer_signed_in? %>
+    <!-- If customer is signed in, display account dropdown -->
+    <div class="navbar-item has-dropdown is-hoverable ">
+      <a class="navbar-link has-text-white">
+        Account
+      </a>
+      <div class="navbar-dropdown">
+        <%= link_to 'View Profile', customer_path(current_customer), class: 'navbar-item' %>
+        <%= link_to 'View Orders', orders_path, class: 'navbar-item' %>
+        <%= button_to "Sign out", destroy_customer_session_path, method: :delete, class: 'navbar-item' %>
+      </div>
+    </div>
+  <% else %>
+    <!-- If customer is not signed in, display sign in button -->
+    <%= button_to "Sign in", new_customer_session_path, class: 'navbar-item mt-2  button is-primary' %>
+  <% end %>
+</div>
+
       <%= link_to cart_path, class: 'button is-primary' do %>
         <span class="icon">
           <i class="fas fa-shopping-cart"></i>
@@ -58,14 +59,6 @@
     </div>
   </div>
 </nav>
-
-<style>
-@media screen and (max-width: 768px) {
-  .navbar-menu.is-active .navbar-item:hover {
-    background-color: black;
-  }
-}
-</style>
 
 
 <script>
