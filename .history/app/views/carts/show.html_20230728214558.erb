@@ -1,0 +1,82 @@
+<div class="container">
+<% if @cart.empty? %>
+  <h3 class="title is-4">Your cart is empty</h3>
+  <%= link_to 'Browse Products', products_path, class: 'button is-primary' %>
+<% else %>
+
+  <% if flash[:added_success] %>
+    <div class="notification is-success flash-message">
+      <%= flash[:added_success] %>
+    </div>
+    <meta http-equiv="refresh" content="5;url=<%= request.original_url %>">
+  <% end %>
+
+  <% if flash[:update_success] %>
+    <div class="notification is-success flash-message">
+      <%= flash[:update_success] %>
+    </div>
+    <meta http-equiv="refresh" content="5;url=<%= request.original_url %>">
+  <% end %>
+
+  <% if flash[:remove_success] %>
+    <div class="notification is-success flash-message">
+      <%= flash[:remove_success] %>
+    </div>
+    <meta http-equiv="refresh" content="5;url=<%= request.original_url %>">
+  <% end %>
+
+  <table class="table is-bordered is-striped is-narrow is-hoverable">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% total_price = 0 %>
+      <% @cart.each do |product_id, quantity| %>
+        <% product = Product.find(product_id) %>
+        <% product_price = product.price * quantity %>
+        <% total_price += product_price %>
+        <tr>
+          <td><%= image_tag(product.image.variant(resize_to_fill: [100, 100]), class: 'image is-64x64') %></td>
+          <td><%= product.name %></td>
+          <td>
+            <%= form_tag cart_update_path, method: :put, class: 'is-flex' do %>
+              <%= hidden_field_tag :product_id, product.id %>
+              <%= number_field_tag :quantity, quantity, min: 1, class: 'input is-small' %>
+              <%= submit_tag 'Update', class: 'button is-primary is-small ml-2' %>
+            <% end %>
+          </td>
+          <td>$<%= product_price %></td>
+          <td>
+            <%= button_to 'Remove', cart_remove_path(product_id: product.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger is-small' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">Total Price:</td>
+        <td><%= total_price %></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <% if customer_signed_in? %>
+    <% if current_customer.primary_province || current_customer.alt_province %>
+      <%= button_to 'Proceed to Checkout', checkout_index_path, class: 'button is-primary' %>
+    <% else %>
+      <%= link_to 'Add Address Details', edit_customer_registration_path(current_customer), method: :get, class: 'button is-primary' %>
+    <% end %>
+
+  <% else %>
+    <%= button_to 'Proceed to Checkout', checkout_guest_path, class: 'button is-primary' %>
+  <% end %>
+
+<% end %>
+
+</div>

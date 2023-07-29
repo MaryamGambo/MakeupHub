@@ -65,12 +65,12 @@
       <p class="title is-5">Total Price: $<%= total_price %></p>
       <% if customer_signed_in? %>
         <% if current_customer.primary_province || current_customer.alt_province %>
-          <%= button_to 'Proceed to Checkout', checkout_index_path, method: :get ,class: 'button is-primary' %>
+          <%= button_to 'Proceed to Checkout', checkout_index_path, class: 'button is-primary' %>
         <% else %>
           <%= link_to 'Add Address Details', edit_customer_registration_path(current_customer), method: :get, class: 'button is-primary' %>
         <% end %>
       <% else %>
-        <%= button_to 'Proceed to Checkout', checkout_guest_path,  method: :get, class: 'button is-primary' %>
+        <%= button_to 'Proceed to Checkout', checkout_guest_path, class: 'button is-primary' %>
       <% end %>
     </div>
 
