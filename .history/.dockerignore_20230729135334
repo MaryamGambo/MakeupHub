@@ -1,5 +1,4 @@
 .dockerignore
-Dockerfile
 
 # Ignore version control files
 .git
