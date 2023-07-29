@@ -1,0 +1,34 @@
+<div class="columns is-multiline">
+  <% @cart.each do |product_id, quantity| %>
+    <% product = Product.find(product_id) %>
+    <% product_price = product.price * quantity %>
+
+    <div class="column is-one-third">
+      <div class="card">
+        <div class="card-content">
+          <div class="columns is-vcentered">
+            <div class="column is-narrow">
+              <% if product.image.attached? %>
+                <div class="image is-64x64">
+                  <%= image_tag product.image.variant(resize_to_fill: [100, 100]) %>
+                </div>
+              <% end %>
+            </div>
+            <div class="column">
+              <h1 class="title is-5"><%= link_to product.name, product %></h1>
+              <p>Price: $<%= product_price %></p>
+            </div>
+            <div class="column is-flex is-flex-direction-column is-justify-content-space-between">
+              <%= form_tag cart_update_path, method: :put, class: 'is-flex' do %>
+                <%= hidden_field_tag :product_id, product.id %>
+                <%= number_field_tag :quantity, quantity, min: 1, class: 'input is-small' %>
+                <%= submit_tag 'Update', class: 'button is-primary is-small ml-2' %>
+              <% end %>
+              <%= button_to 'Remove', cart_remove_path(product_id: product.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger is-small mt-2' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

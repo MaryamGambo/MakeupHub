@@ -62,7 +62,7 @@
     </div>
 
     <div class="has-text-centered">
-      <p class="title is-5">Total Price: $<%= total_price %></p>
+      <p class="title">Total Price: $<%= total_price %></p>
       <% if customer_signed_in? %>
         <% if current_customer.primary_province || current_customer.alt_province %>
           <%= button_to 'Proceed to Checkout', checkout_index_path, class: 'button is-primary' %>

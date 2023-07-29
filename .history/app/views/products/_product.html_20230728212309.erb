@@ -1,0 +1,46 @@
+<div class="column is-one-third">
+  <div class="card equal-height-card">
+    <div class="columns is-vcentered">
+      <% if product.image.attached? %>
+        <div class="column">
+          <div class="card-image">
+            <%= image_tag product.image.variant(resize_to_fill: [800, 600]) %>
+          </div>
+        </div>
+      <% end %>
+      <div class="column">
+        <div class="card-content">
+          <h1 class="title is-size-4-touch is-truncated"><%= link_to product.name, product %></h1>
+          <p class="is-truncated"><%= product.brand.name %></p>
+          <% if product.on_sale_status %>
+            <p class="has-text-weight-bold"><span class="has-text-danger">-10%</span><strong>$<%= (product.price * 0.9).round(2) %></strong></p>
+            <p class="has-text-decoration-line-through has-text-grey"><s>Price: $<%= product.price %></s></p>
+          <% else %>
+            <p>Price: $<%= product.price %></p>
+          <% end %>
+        </div>
+      </div>
+      <div class="column is-flex is-flex-direction-column is-justify-content-space-between">
+        <div>
+          <%= form_tag cart_update_path, method: :put, class: 'is-flex' do %>
+            <%= hidden_field_tag :product_id, product.id %>
+            <%= number_field_tag :quantity, quantity, min: 1, class: 'input is-small' %>
+            <%= submit_tag 'Update', class: 'button is-primary is-small ml-2' %>
+          <% end %>
+        </div>
+        <div>
+          <%= button_to 'Remove', cart_remove_path(product_id: product.id), method: :delete, data: { confirm: 'Are you sure?' }, class: 'button is-danger is-small' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .equal-height-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+</style>
