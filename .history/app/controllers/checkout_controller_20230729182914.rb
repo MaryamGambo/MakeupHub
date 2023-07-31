@@ -195,8 +195,8 @@ class CheckoutController < ApplicationController
       payment_method_types: ['card'],
       line_items: line_items,
       mode: 'payment',
-      success_url: "https://3f69-142-160-124-32.ngrok-free.app/checkout/success?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "https://3f69-142-160-124-32.ngrok-free.app/checkout/cancel",
+      success_url: "https://3fee-142-160-124-32.ngrok-free.app/checkout/success?session_id={CHECKOUT_SESSION_ID}",
+      cancel_url: "https://3fee-142-160-124-32.ngrok-free.app/checkout/cancel",
       metadata: {
         customer_address: customer_address.to_json,
         cart_info: @cart.to_json
