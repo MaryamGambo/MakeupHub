@@ -5,6 +5,13 @@
   <% else %>
     <h3 class="title">Your Cart</h3>
 
+    <% if flash[:notice] %>
+      <div class="notification is-success flash-message">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+
     <div class="columns is-multiline">
       <% total_price = 0 %>
       <% @cart.each do |product_id, quantity| %>

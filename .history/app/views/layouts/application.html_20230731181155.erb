@@ -30,3 +30,17 @@
   </body>
 </html>
 
+
+<script>
+   function removeFlashMessage() {
+  const flashMessages = document.querySelectorAll(".flash-message");
+  flashMessages.forEach((message) => {
+    message.remove();
+  });
+}
+
+document.addEventListener('turbolinks:load', function() {
+  setTimeout(removeFlashMessage, 5000);
+});
+
+  </script>

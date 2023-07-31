@@ -3,6 +3,7 @@
   <head>
     <title>MakeupHub</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+     <script src="https://js.stripe.com/v3/"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -18,7 +19,7 @@
 
     <section class="section">
       <% if notice.present? %>
-      <div class="notification is-success flash-message ">
+      <div class="notification is-success flash-message">
            <%= notice %>
       </div>
       <% end %>
@@ -27,6 +28,19 @@
     <%= render 'shared/footer' %>
 
 
+      <script>
+        // Automatically hide the flash message after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+          const flashMessage = document.querySelector('.flash-message');
+          if (flashMessage) {
+            setTimeout(function() {
+              flashMessage.style.display = 'none';
+            }, 5000);
+          }
+        });
+      </script>
+
   </body>
 </html>
+
 

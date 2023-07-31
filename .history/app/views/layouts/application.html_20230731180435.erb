@@ -30,3 +30,15 @@
   </body>
 </html>
 
+
+<script>
+    // Script to remove the flash message after 5 seconds
+    document.addEventListener('turbolinks:load', function() {
+      const flashMessages = document.querySelectorAll(".flash-message");
+      flashMessages.forEach((message) => {
+      setTimeout(() => {
+        message.remove();
+      }, 5000);
+    });
+    });
+  </script>

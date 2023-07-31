@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   end
 
+  get '/remove_flash_message', to: 'application#remove_flash_message'
+
   resources :customer, only: [:show]
   devise_for :customers
   get 'home/index'

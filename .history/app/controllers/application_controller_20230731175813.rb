@@ -1,7 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-
+  def remove_flash_message
+    flash[:notice] = nil
+    head :ok
+  end
 
   protected
 

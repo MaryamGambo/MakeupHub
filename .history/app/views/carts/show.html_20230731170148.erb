@@ -5,6 +5,24 @@
   <% else %>
     <h3 class="title">Your Cart</h3>
 
+    <% if flash[:added_success] %>
+      <div class="notification is-success flash-message">
+        <%= flash[:added_success] %>
+      </div>
+    <% end %>
+
+    <% if flash[:update_success] %>
+      <div class="notification is-success flash-message">
+        <%= flash[:update_success] %>
+      </div>
+    <% end %>
+
+    <% if flash[:remove_success] %>
+      <div class="notification is-success flash-message">
+        <%= flash[:remove_success] %>
+      </div>
+    <% end %>
+
     <div class="columns is-multiline">
       <% total_price = 0 %>
       <% @cart.each do |product_id, quantity| %>

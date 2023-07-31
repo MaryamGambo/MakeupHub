@@ -3,6 +3,7 @@
   <head>
     <title>MakeupHub</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+     <script src="https://js.stripe.com/v3/"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -30,3 +31,15 @@
   </body>
 </html>
 
+
+<script>
+    // Script to remove the flash message after 5 seconds
+    document.addEventListener('DOMContentLoaded', function() {
+      const flashMessages = document.querySelectorAll(".flash-message");
+      flashMessages.forEach((message) => {
+      setTimeout(() => {
+        message.remove();
+      }, 5000);
+    });
+    });
+  </script>

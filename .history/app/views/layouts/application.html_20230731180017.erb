@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MakeupHub</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+     <%= stylesheet_link_tag 'application', 'bulma', media: 'all', 'data-turbolinks-track': 'reload' %>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-DfXdHTHR01Z/B5Ug+a2+Cqkd2p4WJn4YlFvb4cJ9ZDK6zZVjJt7hxRJr1I5tN9Fv" crossorigin="anonymous">
+
+    <%= javascript_importmap_tags %>
+
+  </head>
+
+  <body>
+      <%= render 'shared/menu' %>
+
+    <section class="section">
+      <% if notice.present? %>
+      <div class="notification is-success flash-message ">
+           <%= notice %>
+      </div>
+      <% end %>
+      <%= yield %>
+    </section>
+    <%= render 'shared/footer' %>
+
+
+  </body>
+</html>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const flashMessage = document.querySelector(".flash-message");
+
+  if (flashMessage) {
+    setTimeout(() => {
+      removeFlashMessage();
+    }, 5000);
+  }
+
+  function removeFlashMessage() {
+    const flashMessage = document.querySelector(".flash-message");
+
+    if (flashMessage) {
+      const url = '/remove_flash_message';
+
+      fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': '<%= csrf_token %>'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          flashMessage.remove();
+        } else {
+          console.error('Failed to remove flash message.');
+        }
+      })
+      .catch(error => {
+        console.error('Error while removing flash message:', error);
+      });
+    }
+  }
+});
+
+  </script>

@@ -3,6 +3,7 @@
   <head>
     <title>MakeupHub</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+     <script src="https://js.stripe.com/v3/"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -18,7 +19,7 @@
 
     <section class="section">
       <% if notice.present? %>
-      <div class="notification is-success flash-message ">
+      <div class="notice notification is-success flash-message">
            <%= notice %>
       </div>
       <% end %>
@@ -30,3 +31,14 @@
   </body>
 </html>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const flashMessages = document.querySelectorAll(".flash-message");
+
+    flashMessages.forEach((message) => {
+      setTimeout(() => {
+        message.remove();
+      }, 5000);
+    });
+  });
+</script>
