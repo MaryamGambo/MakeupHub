@@ -6,7 +6,7 @@ ActiveAdmin.register_page 'Orders Summary' do
           column 'Order ID', sortable: 'orders.id' do |order|
             order.id
           end
-          column 'Date' do |order|
+          column 'Date',  do |order|
             order.order_date
           end
           column 'Products Ordered' do |order|
