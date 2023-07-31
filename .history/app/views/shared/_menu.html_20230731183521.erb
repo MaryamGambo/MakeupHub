@@ -21,9 +21,9 @@
             Account
           </a>
           <div class="navbar-dropdown ">
-            <%= link_to 'View Profile', customer_path(current_customer), class: 'navbar-item' %>
-            <%= link_to 'View Orders', orders_path, class: 'navbar-item' %>
-            <%= button_to "Sign out", destroy_customer_session_path, method: :delete, class: "button" %>
+            <%= link_to 'View Profile', customer_path(current_customer), class: 'navbar-item has-text-white' %>
+            <%= link_to 'View Orders', orders_path, class: 'navbar-item has-text-white' %>
+            <%= button_to "Sign out", destroy_customer_session_path, method: :delete, class: 'navbar-item ' %>
           </div>
         </div>
       <% else %>
@@ -60,14 +60,13 @@
 </nav>
 
 <style>
+.navbar-item.has-dropdown .navbar-dropdown:hover{
+  background-color:grey;
+}
 @media screen and (max-width: 768px) {
-  .navbar-menu.is-active .navbar-item{
-    color: white;
-  }
   .navbar-menu.is-active .navbar-item:hover {
     background-color: grey;
   }
-
 }
 </style>
 

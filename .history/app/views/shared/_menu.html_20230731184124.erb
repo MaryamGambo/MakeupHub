@@ -23,7 +23,7 @@
           <div class="navbar-dropdown ">
             <%= link_to 'View Profile', customer_path(current_customer), class: 'navbar-item' %>
             <%= link_to 'View Orders', orders_path, class: 'navbar-item' %>
-            <%= button_to "Sign out", destroy_customer_session_path, method: :delete, class: "button" %>
+            <%= button_to "Sign out", destroy_customer_session_path, method: :delete, class: 'navbar-item ' %>
           </div>
         </div>
       <% else %>
@@ -66,6 +66,7 @@
   }
   .navbar-menu.is-active .navbar-item:hover {
     background-color: grey;
+    color: white;
   }
 
 }
